@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta de Acompañamiento Estratégico — David Aponte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#050d1f;
+    --bg-2:#0a1430;
+    --bg-3:#0f1c3d;
+    --cyan:#00d4ff;
+    --purple:#7b2fff;
+    --orange:#ff8c00;
+    --pink:#ff2fb5;
+    --green:#00ffa3;
+    --text:#ffffff;
+    --text-2:rgba(255,255,255,.72);
+    --text-3:rgba(255,255,255,.45);
+    --border:rgba(0,212,255,.18);
+    --border-strong:rgba(0,212,255,.4);
+    --card:rgba(255,255,255,.03);
+    --card-hover:rgba(255,255,255,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    font-weight:400;
+    line-height:1.55;
+    overflow-x:hidden;
+    background-image:
+      radial-gradient(at 10% 5%,rgba(123,47,255,.18) 0,transparent 45%),
+      radial-gradient(at 90% 20%,rgba(0,212,255,.14) 0,transparent 45%),
+      radial-gradient(at 50% 90%,rgba(255,47,181,.10) 0,transparent 50%);
+    min-height:100vh;
+  }
+  .container{max-width:1200px;margin:0 auto;padding:0 24px}
+  /* === HEADER === */
+  .top-bar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(5,13,31,.85);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);
+  }
+  .top-bar-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 24px;max-width:1200px;margin:0 auto;
+  }
+  .brand{
+    display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;
+  }
+  .brand-dot{
+    width:10px;height:10px;border-radius:50%;
+    background:linear-gradient(135deg,var(--cyan),var(--purple));
+    box-shadow:0 0 14px var(--cyan);
+  }
+  .brand span.amp{color:var(--purple);font-weight:800}
+  .nav-confidencial{
+    font-size:11px;font-weight:600;letter-spacing:.14em;
+    color:var(--cyan);background:rgba(0,212,255,.08);
+    padding:6px 12px;border-radius:99px;border:1px solid var(--border);
+  }
+  /* === HERO === */
+  .hero{padding:80px 0 60px;text-align:center}
+  .hero-tag{
+    display:inline-block;font-size:11px;letter-spacing:.22em;
+    color:var(--cyan);font-weight:700;
+    padding:6px 14px;border:1px solid var(--border-strong);
+    border-radius:99px;margin-bottom:24px;
+    background:rgba(0,212,255,.05);
+  }
+  .hero h1{
+    font-size:clamp(36px,5.5vw,64px);
+    font-weight:800;
+    line-height:1.05;letter-spacing:-.025em;
+    margin-bottom:18px;
+  }
+  .hero h1 .grad{
+    background:linear-gradient(135deg,var(--cyan) 0%,var(--purple) 60%,var(--pink) 100%);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .hero p.sub{
+    font-size:clamp(15px,1.4vw,18px);
+    color:var(--text-2);max-width:680px;margin:0 auto 40px;
+  }
+  .meta-pills{
+    display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:24px;
+  }
+  .pill{
+    font-size:13px;font-weight:500;color:var(--text-2);
+    padding:8px 16px;border-radius:99px;
+    background:var(--card);border:1px solid var(--border);
+  }
+  .pill strong{color:var(--text);font-weight:700}
+  /* === SECTIONS === */
+  section{padding:64px 0;position:relative}
+  .sec-label{
+    font-size:11px;letter-spacing:.22em;font-weight:700;
+    color:var(--cyan);text-transform:uppercase;margin-bottom:10px;
+  }
+  .sec-title{
+    font-size:clamp(26px,3.4vw,40px);
+    font-weight:800;line-height:1.15;letter-spacing:-.02em;margin-bottom:14px;
+  }
+  .sec-title .grad{
+    background:linear-gradient(135deg,var(--cyan),var(--purple));
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .sec-lead{
+    color:var(--text-2);font-size:16px;max-width:760px;margin-bottom:36px;
+  }
+  /* === CARDS === */
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:24px;
+    transition:all .25s ease;
+  }
+  .card:hover{background:var(--card-hover);border-color:var(--border-strong)}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  @media(max-width:880px){.grid-3,.grid-2{grid-template-columns:1fr}}
+  .big-num{
+    font-size:clamp(32px,4vw,46px);font-weight:800;letter-spacing:-.02em;
+    background:linear-gradient(135deg,var(--cyan),var(--purple));
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+    line-height:1.05;margin-bottom:6px;
+  }
+  .card-label{
+    font-size:11px;letter-spacing:.18em;font-weight:700;
+    color:var(--text-3);text-transform:uppercase;margin-bottom:14px;
+  }
+  .card-desc{font-size:14px;color:var(--text-2);margin-top:4px}
+  /* === DIAGNOSTIC SECTION === */
+  .diag-grid{
+    display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start;
+  }
+  @media(max-width:980px){.diag-grid{grid-template-columns:1fr}}
+  .archetype-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 16px;border-radius:12px;background:var(--card);
+    border:1px solid var(--border);margin-bottom:10px;
+  }
+  .archetype-name{font-weight:600;font-size:14px}
+  .archetype-pct{font-weight:800;font-size:18px;color:var(--cyan)}
+  .archetype-row.dom{
+    background:linear-gradient(135deg,rgba(0,212,255,.12),rgba(123,47,255,.12));
+    border-color:var(--border-strong);
+  }
+  .archetype-row.dom .archetype-pct{
+    background:linear-gradient(135deg,var(--cyan),var(--purple));
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .quote-block{
+    border-left:3px solid var(--orange);
+    padding:18px 22px;background:rgba(255,140,0,.06);
+    border-radius:0 12px 12px 0;margin-top:24px;
+  }
+  .quote-block .lab{
+    font-size:11px;letter-spacing:.18em;color:var(--orange);font-weight:700;margin-bottom:8px;
+  }
+  .quote-block p{font-style:italic;color:var(--text-2);font-size:15px}
+  /* === ROADMAP === */
+  .roadmap{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:32px;
+  }
+  @media(max-width:980px){.roadmap{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.roadmap{grid-template-columns:1fr}}
+  .phase{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:14px;padding:20px;cursor:pointer;
+    transition:all .3s ease;position:relative;overflow:hidden;
+  }
+  .phase:hover{transform:translateY(-3px);border-color:var(--cyan);background:var(--card-hover)}
+  .phase-num{
+    font-size:12px;font-weight:700;color:var(--cyan);letter-spacing:.16em;margin-bottom:10px;
+  }
+  .phase-name{font-size:16px;font-weight:700;margin-bottom:8px;line-height:1.2}
+  .phase-month{font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:14px}
+  .phase-milestone{font-size:13px;color:var(--text-2);line-height:1.45}
+  .phase-milestone strong{color:var(--cyan)}
+  .phase[data-active="1"]{
+    background:linear-gradient(135deg,rgba(0,212,255,.12),rgba(123,47,255,.12));
+    border-color:var(--border-strong);
+  }
+  /* === ECON SECTION === */
+  .econ-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
+  @media(max-width:880px){.econ-grid{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px}
+  table th{
+    text-align:left;padding:12px 14px;font-weight:600;
+    color:var(--text-3);font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;border-bottom:1px solid var(--border);
+  }
+  table td{
+    padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.04);
+    color:var(--text);
+  }
+  table tr:last-child td{border-bottom:none}
+  table .total-row td{
+    background:rgba(0,212,255,.06);font-weight:700;
+    color:var(--cyan);font-size:15px;
+  }
+  /* === SIMULATOR === */
+  .sim{
+    background:linear-gradient(135deg,rgba(0,212,255,.05),rgba(123,47,255,.05));
+    border:1px solid var(--border-strong);
+    border-radius:20px;padding:32px;margin-top:32px;
+  }
+  .sim h3{font-size:22px;font-weight:700;margin-bottom:6px}
+  .sim p.sim-lead{color:var(--text-2);margin-bottom:24px;font-size:14px}
+  .sim-grid{
+    display:grid;grid-template-columns:1fr 1.2fr;gap:32px;align-items:start;
+  }
+  @media(max-width:880px){.sim-grid{grid-template-columns:1fr}}
+  .slider-row{margin-bottom:24px}
+  .slider-label{
+    display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;
+  }
+  .slider-label .name{font-size:13px;color:var(--text-2);font-weight:500}
+  .slider-label .val{
+    font-size:18px;font-weight:700;color:var(--cyan);
+  }
+  input[type=range]{
+    width:100%;-webkit-appearance:none;height:6px;border-radius:99px;
+    background:rgba(255,255,255,.1);outline:none;cursor:pointer;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;
+    width:18px;height:18px;border-radius:50%;
+    background:linear-gradient(135deg,var(--cyan),var(--purple));
+    cursor:pointer;box-shadow:0 0 10px rgba(0,212,255,.5);
+  }
+  input[type=range]::-moz-range-thumb{
+    width:18px;height:18px;border-radius:50%;border:none;
+    background:linear-gradient(135deg,var(--cyan),var(--purple));
+    cursor:pointer;
+  }
+  .sim-result{
+    background:var(--bg-2);border:1px solid var(--border);
+    border-radius:14px;padding:22px;
+  }
+  .sim-result h4{
+    font-size:11px;letter-spacing:.18em;font-weight:700;
+    color:var(--text-3);text-transform:uppercase;margin-bottom:18px;
+  }
+  .sim-row{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);
+  }
+  .sim-row:last-child{border-bottom:none}
+  .sim-row .who{font-size:13px;color:var(--text-2)}
+  .sim-row .amt{font-size:16px;font-weight:700;color:var(--text)}
+  .sim-row.you .amt{color:var(--green)}
+  .sim-row.month{font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:.14em;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+  /* === LIST === */
+  .check-list{margin-top:16px}
+  .check-item{
+    display:flex;gap:14px;padding:12px 0;
+    border-bottom:1px solid rgba(255,255,255,.04);
+  }
+  .check-item:last-child{border-bottom:none}
+  .check-icon{
+    width:22px;height:22px;flex-shrink:0;border-radius:50%;
+    background:linear-gradient(135deg,var(--cyan),var(--purple));
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:12px;color:var(--bg);
+  }
+  .check-item p{font-size:14px;color:var(--text-2);line-height:1.5}
+  .check-item p strong{color:var(--text);font-weight:600}
+  /* === CTA === */
+  .cta-box{
+    background:linear-gradient(135deg,rgba(0,212,255,.10),rgba(123,47,255,.10));
+    border:1px solid var(--border-strong);
+    border-radius:24px;padding:48px;text-align:center;
+    margin:48px 0;
+  }
+  .cta-box h2{
+    font-size:clamp(26px,3vw,38px);font-weight:800;margin-bottom:14px;letter-spacing:-.02em;
+  }
+  .cta-box p{color:var(--text-2);max-width:580px;margin:0 auto 28px;font-size:16px}
+  .cta-btn{
+    display:inline-block;padding:14px 32px;border-radius:99px;
+    background:linear-gradient(135deg,var(--cyan),var(--purple));
+    color:#fff;font-weight:700;font-size:15px;text-decoration:none;
+    box-shadow:0 8px 32px rgba(0,212,255,.3);
+    transition:transform .2s ease;letter-spacing:.02em;
+  }
+  .cta-btn:hover{transform:translateY(-2px)}
+  /* === FOOTER === */
+  footer{
+    text-align:center;padding:40px 24px;border-top:1px solid var(--border);
+    color:var(--text-3);font-size:12px;margin-top:48px;
+  }
+  /* === HIGHLIGHT === */
+  .hl{
+    color:var(--cyan);font-weight:600;
+  }
+  .hl-orange{color:var(--orange);font-weight:600}
+  .hl-green{color:var(--green);font-weight:600}
+  /* tabs */
+  .tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+  .tab{
+    padding:8px 18px;border-radius:99px;background:var(--card);
+    border:1px solid var(--border);font-size:13px;font-weight:500;
+    color:var(--text-2);cursor:pointer;transition:all .2s ease;
+  }
+  .tab:hover{color:var(--text)}
+  .tab.active{
+    background:linear-gradient(135deg,rgba(0,212,255,.18),rgba(123,47,255,.18));
+    border-color:var(--border-strong);color:var(--text);
+  }
+  .tab-content{display:none}
+  .tab-content.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+  /* responsive */
+  @media(max-width:560px){
+    .hero{padding:48px 0 40px}
+    section{padding:48px 0}
+    .cta-box{padding:32px 20px}
+    .sim{padding:22px}
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <div class="brand">
+      <div class="brand-dot"></div>
+      Nathalia <span class="amp">&</span> Jorge
+    </div>
+    <div class="nav-confidencial">PROPUESTA · CONFIDENCIAL</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero container">
+  <div class="hero-tag">ACOMPAÑAMIENTO ESTRATÉGICO · 6 MESES</div>
+  <h1>
+    Construyamos juntos<br>
+    el ecosistema que tu <span class="grad">visión a 24 meses</span> exige.
+  </h1>
+  <p class="sub">
+    Una propuesta diseñada para David Alexander Aponte Becerra a partir de su diagnóstico
+    estratégico del 22 de mayo de 2026. No es una agencia más. Es una sociedad con piel
+    en el juego para construir tu autoridad, tu metodología y tu ecosistema en Hotmart.
+  </p>
+  <div class="meta-pills">
+    <div class="pill">📅 <strong>6 meses</strong> de acompañamiento</div>
+    <div class="pill">💎 <strong>$9.5M COP</strong>/mes fijo</div>
+    <div class="pill">🤝 <strong>Coproducción</strong> Hotmart perpetua</div>
+    <div class="pill">🎯 Meta a 6m: <strong>$80M/mes</strong></div>
+  </div>
+</header>
+
+<!-- 1. RESUMEN EJECUTIVO -->
+<section>
+  <div class="container">
+    <div class="sec-label">Resumen ejecutivo</div>
+    <h2 class="sec-title">Tres números que cuentan la <span class="grad">historia completa</span>.</h2>
+    <p class="sec-lead">
+      Si solo lees una cosa de esta propuesta, que sea esta sección.
+    </p>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-label">INVERSIÓN FIJA TOTAL</div>
+        <div class="big-num">$57M COP</div>
+        <div class="card-desc">$9.5M COP/mes × 6 meses. Cubre el equipo senior + producción durante la fase intensiva de creación.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">META INCREMENTAL ANUAL</div>
+        <div class="big-num">$480M+</div>
+        <div class="card-desc">Cuando alcances $80M/mes (tu meta), el incremental sobre hoy te paga la inversión <strong>10x sobre</strong> en un año.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">COPRODUCCIÓN HOTMART</div>
+        <div class="big-num">Perpetua</div>
+        <div class="card-desc">Quedamos socios en el ecosistema digital que construyamos juntos. Sin agencias. Sin proveedores. Socios.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. LO QUE NOS DIJO TU DIAGNÓSTICO -->
+<section>
+  <div class="container">
+    <div class="sec-label">El punto de partida</div>
+    <h2 class="sec-title">Lo que nos dijo <span class="grad">tu diagnóstico</span>.</h2>
+    <p class="sec-lead">
+      Esta propuesta no es genérica. Está construida a partir de las 33 respuestas que diste
+      el 22 de mayo. Cada decisión a continuación está anclada en algo que tú dijiste.
+    </p>
+
+    <div class="diag-grid">
+      <div>
+        <div class="card-label">Arquetipo dominante</div>
+        <div class="archetype-row dom">
+          <div class="archetype-name">🎓 El Maestro Digital</div>
+          <div class="archetype-pct">23%</div>
+        </div>
+        <div class="archetype-row">
+          <div class="archetype-name">🎤 Conferencista Mediático</div>
+          <div class="archetype-pct">19%</div>
+        </div>
+        <div class="archetype-row">
+          <div class="archetype-name">👥 Líder de Comunidad</div>
+          <div class="archetype-pct">13%</div>
+        </div>
+
+        <div class="quote-block">
+          <div class="lab">EL ANCLA DE ESTA PROPUESTA — TUS PROPIAS PALABRAS</div>
+          <p>"Que sean iguales a todas las agencias y consultores que he contratado hasta ahora,
+          muchas palabras, pocos resultados pero sí alta preocupación por facturar mensualmente.
+          Que no se tenga conocimiento específico en los retos a resolver."</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="card-label">Madurez por dimensión</div>
+        <div class="card" style="padding:20px">
+          <canvas id="radarChart" height="280"></canvas>
+        </div>
+        <div style="margin-top:18px;font-size:14px;color:var(--text-2);line-height:1.6">
+          <strong style="color:var(--text)">Promedio 75/100.</strong> No partimos desde cero.
+          Estás claro en visión, modelo y disponibilidad. Las brechas reales están en
+          <span class="hl">audiencia</span> y <span class="hl">madurez de cursos</span> — exactamente donde Nathalia es decisiva.
+        </div>
+      </div>
+    </div>
+
+    <!-- Tres anclas -->
+    <div style="margin-top:48px">
+      <div class="card-label" style="margin-bottom:18px">Las tres anclas que definen esta propuesta</div>
+      <div class="grid-3">
+        <div class="card">
+          <div style="font-size:24px;margin-bottom:10px">🛡️</div>
+          <h4 style="font-weight:700;margin-bottom:8px;font-size:16px">Tu objeción explícita</h4>
+          <p style="color:var(--text-2);font-size:14px">
+            No quieres otra agencia que cobre sin entregar. Por eso el modelo combina
+            <span class="hl">fijo razonable</span> + <span class="hl">coproducción perpetua</span>.
+            Nuestro mayor retorno depende de tu éxito real.
+          </p>
+        </div>
+        <div class="card">
+          <div style="font-size:24px;margin-bottom:10px">⚡</div>
+          <h4 style="font-weight:700;margin-bottom:8px;font-size:16px">Break-even en 3 meses</h4>
+          <p style="color:var(--text-2);font-size:14px">
+            Lo dijiste claro. Por eso la <span class="hl">Fase 2 (Monetización rápida)</span> está
+            entre el mes 2 y 3: membresía fundadora con 50-100 personas a ticket alto, mientras
+            el ecosistema completo se sigue construyendo.
+          </p>
+        </div>
+        <div class="card">
+          <div style="font-size:24px;margin-bottom:10px">🎯</div>
+          <h4 style="font-weight:700;margin-bottom:8px;font-size:16px">Meta $80M COP/mes</h4>
+          <p style="color:var(--text-2);font-size:14px">
+            500-1000 miembros activos en membresía, libro publicado, MVP de la app, 4 cursos generando.
+            Todo eso se ordena en las <span class="hl">6 fases</span> que vienen.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. LAS 6 FASES -->
+<section>
+  <div class="container">
+    <div class="sec-label">El roadmap</div>
+    <h2 class="sec-title">6 meses, <span class="grad">6 fases</span>, 6 hitos verificables.</h2>
+    <p class="sec-lead">
+      Cada fase tiene un hito medible. Si no lo cumplimos, no cobramos el siguiente mes hasta corregirlo.
+      Esto no es marketing — es contractual.
+    </p>
+
+    <div class="roadmap">
+      <div class="phase" data-phase="1">
+        <div class="phase-num">FASE 1</div>
+        <div class="phase-name">Sanear</div>
+        <div class="phase-month">MES 1</div>
+        <div class="phase-milestone">Resolver los <strong>4 incendios</strong> del diagnóstico + auditoría legal y reputacional completa.</div>
+      </div>
+      <div class="phase" data-phase="2">
+        <div class="phase-num">FASE 2</div>
+        <div class="phase-name">Identidad</div>
+        <div class="phase-month">MES 1-2</div>
+        <div class="phase-milestone">Posicionamiento <strong>Maestro Digital</strong>, manifiesto, nueva web Hotmart-ready, LinkedIn refactorizado.</div>
+      </div>
+      <div class="phase" data-phase="3" data-active="1">
+        <div class="phase-num">FASE 3</div>
+        <div class="phase-name">Break-even</div>
+        <div class="phase-month">MES 2-3</div>
+        <div class="phase-milestone"><strong>Membresía fundadora</strong> cerrada lanzada: 50-100 personas a ticket alto. Primer flujo recurrente entrando.</div>
+      </div>
+      <div class="phase" data-phase="4">
+        <div class="phase-num">FASE 4</div>
+        <div class="phase-name">Metodología</div>
+        <div class="phase-month">MES 3-4</div>
+        <div class="phase-milestone">Nathalia refactoriza <strong>Transformación Financiera 2.0</strong> + arquitectura de cursos escalera (intermedio/avanzado).</div>
+      </div>
+      <div class="phase" data-phase="5">
+        <div class="phase-num">FASE 5</div>
+        <div class="phase-name">Contenido</div>
+        <div class="phase-month">MES 4-5</div>
+        <div class="phase-milestone">Sistema de contenido replicable: <strong>90 piezas/mes</strong> sin que tú toques edición ni montaje.</div>
+      </div>
+      <div class="phase" data-phase="6">
+        <div class="phase-num">FASE 6</div>
+        <div class="phase-name">Autoridad</div>
+        <div class="phase-month">MES 5-6</div>
+        <div class="phase-milestone">1 conferencia <strong>500+ personas</strong> confirmada, sinopsis de libro lista, propuesta editorial enviada.</div>
+      </div>
+    </div>
+
+    <!-- Detalle por fase -->
+    <div style="margin-top:48px">
+      <div class="tabs" id="phase-tabs">
+        <div class="tab active" data-target="p1">F1 · Sanear</div>
+        <div class="tab" data-target="p2">F2 · Identidad</div>
+        <div class="tab" data-target="p3">F3 · Break-even</div>
+        <div class="tab" data-target="p4">F4 · Metodología</div>
+        <div class="tab" data-target="p5">F5 · Contenido</div>
+        <div class="tab" data-target="p6">F6 · Autoridad</div>
+      </div>
+
+      <div class="tab-content active" id="p1">
+        <div class="card">
+          <h3 style="margin-bottom:8px;font-size:20px;font-weight:700">Fase 1 — Sanear la reputación digital · Mes 1</h3>
+          <p style="color:var(--text-2);margin-bottom:16px;font-size:14px">
+            Antes de construir nada nuevo, blindamos la promesa. La regla es simple: nadie compra de un experto cuyo
+            entorno digital genera dudas.
+          </p>
+          <div class="check-list">
+            <div class="check-item"><div class="check-icon">✓</div><p><strong>Corrección del texto en inglés</strong> que aparece en el curso actual + revisión de copy de toda la oferta.</p></div>
+            <div class="check-item"><div class="check-icon">✓</div><p><strong>Actualización AMV</strong> (Asesor en Valores Mercado de Valores) vencida — gestión completa con AMV.</p></div>
+            <div class="check-item"><div class="check-icon">✓</div><p><strong>Reemplazo del lead magnet</strong> actual por uno real, alineado a "Transformación Financiera".</p></div>
+            <div class="check-item"><div class="check-icon">✓</div><p><strong>Reemplazo del video GoAnimate</strong> en LinkedIn por video profesional con tu rostro y tu voz.</p></div>
+            <div class="check-item"><div class="check-icon">✓</div><p>Auditoría legal de testimonios, claims financieros y disclaimers (Jorge + asesor legal externo).</p></div>
+          </div>
+          <div style="margin-top:18px;padding:14px 18px;background:rgba(0,255,163,.06);border-left:3px solid var(--green);border-radius:0 10px 10px 0">
+            <div style="font-size:11px;letter-spacing:.18em;color:var(--green);font-weight:700;margin-bottom:6px">HITO MES 1</div>
+            <div style="font-size:14px;color:var(--text)">Cero banderas rojas visibles en tu entorno digital + AMV vigente.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="p2">
+        <div class="card">
+          <h3 style="margin-bottom:8px;font-size:20px;font-weight:700">Fase 2 — Identidad y narrativa · Mes 1-2</h3>
+          <p style="color:var(--text-2);margin-bottom:16px;font-size:14px">
+            Pasas de "uno más" a <span class="hl">Maestro Digital con metodología propia</span>. La promesa se vuelve verificable.
+          </p>
+          <div class="check-list">
+            <div class="check-item"><div class="check-icon">✓</div><p><strong>Manifiesto de marca</strong>: la promesa medible de "tendrá un plan financiero personal claro" se convierte en sistema verificable.</p></div>
+            <div class="check-item"><div class="check-icon">✓</div><p><strong>Nueva web one-pager Hotmart-ready</strong>, optimizada para conversión (no es un portafolio, es un embudo).</p></div>
+            <div class="check-item"><div class="check-icon">✓</div><p>Refactor de <strong>LinkedIn e Instagram</strong>: bio, destacados, foto, prueba social, primeras piezas de manifiesto.</p></div>
+            <div class="check-item"><div class="check-icon">✓</div><p>Diferenciador frente a Juan Diego Gómez / Club de Inversionistas / Nicolás Abril: <strong>método pedagógico paso a paso replicable</strong> (lo que tú escribiste).</p></div>
+          </div>
+          <div style="margin-top:18px;padding:14px 18px;background:rgba(0,255,163,.06);border-left:3px solid var(--green);border-radius:0 10px 10px 0">
+            <div style="font-size:11px;letter-spacing:.18em;color:var(--green);font-weight:700;margin-bottom:6px">HITO MES 2</div>
+            <div style="font-size:14px;color:var(--text)">Web nueva live + LinkedIn al estándar All-Star + 3 piezas de manifiesto publicadas.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="p3">
+        <div class="card">
+          <h3 style="margin-bottom:8px;font-size:20px;font-weight:700">Fase 3 — Monetización rápida · Mes 2-3</h3>
+          <p style="color:var(--text-2);margin-bottom:16px;font-size:14px">
+            Aquí cumplimos tu compromiso de <span class="hl-orange">break-even en 3 meses</span>. No esperamos al lanzamiento perfecto:
+            lanzamos una membresía fundadora con tu audiencia caliente actual.
+          </p>
+          <div class="check-list">
+            <div class="check-item"><div class="check-icon">✓</div><p><strong>Diseño de la membresía cerrada</strong>: promesa, beneficios, ritmo de contenido, comunidad cerrada.</p></div>
+            <div class="check-item"><div class="check-icon">✓</div><p><strong>Oferta fundadora</strong> con plazas limitadas y precio de adopción temprana (ej: 50 fundadores a ticket alto).</p></div>
+            <div class="check-item"><div class="check-icon">✓</div><p><strong>Setup técnico</strong>: cobro recurrente Hotmart, comunidad privada (Telegram/Discord/Circle), onboarding automatizado.</p></div>
+            <div class="check-item"><div class="check-icon">✓</div><p>Campaña de lanzamiento orgánica + apoyo de tu base de LinkedIn / Portafolio / iNNpulsa.</p></div>
+          </div>
+          <div style="margin-top:18px;padding:14px 18px;background:rgba(0,255,163,.06);border-left:3px solid var(--green);border-radius:0 10px 10px 0">
+            <div style="font-size:11px;letter-spacing:.18em;color:var(--green);font-weight:700;margin-bottom:6px">HITO MES 3</div>
+            <div style="font-size:14px;color:var(--text)">50+ fundadores pagando membresía recurrente. Flujo mensual entrando ANTES de la mitad del acompañamiento.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="p4">
+        <div class="card">
+          <h3 style="margin-bottom:8px;font-size:20px;font-weight:700">Fase 4 — Metodología (Nathalia) · Mes 3-4</h3>
+          <p style="color:var(--text-2);margin-bottom:16px;font-size:14px">
+            Nathalia toma protagonismo. Tu diferencial declarado — <span class="hl">"método pedagógico paso a paso replicable"</span> —
+            tiene que existir como sistema, no como intuición.
+          </p>
+          <div class="check-list">
+            <div class="check-item"><div class="check-icon">✓</div><p><strong>Refactor pedagógico de "Transformación Financiera 2.0"</strong>: ruta de aprendizaje, micrologros, evaluaciones, contenido por etapa.</p></div>
+            <div class="check-item"><div class="check-icon">✓</div><p><strong>Arquitectura de cursos escalera</strong>: básico (lead magnet pagado), intermedio (ticket medio), avanzado/premium (ticket alto + 1:1).</p></div>
+            <div class="check-item"><div class="check-icon">✓</div><p><strong>Sistema de evaluación</strong> del progreso del estudiante (la "promesa medible" se vuelve dashboard).</p></div>
+            <div class="check-item"><div class="check-icon">✓</div><p>Definición de la <strong>versión MVP de la app</strong> de Libertad Financiera (sin código aún — pliego para desarrollador).</p></div>
+          </div>
+          <div style="margin-top:18px;padding:14px 18px;background:rgba(0,255,163,.06);border-left:3px solid var(--green);border-radius:0 10px 10px 0">
+            <div style="font-size:11px;letter-spacing:.18em;color:var(--green);font-weight:700;margin-bottom:6px">HITO MES 4</div>
+            <div style="font-size:14px;color:var(--text)">Curso refactorizado + 2do producto diseñado + pliego MVP app entregado.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="p5">
+        <div class="card">
+          <h3 style="margin-bottom:8px;font-size:20px;font-weight:700">Fase 5 — Sistema de contenido · Mes 4-5</h3>
+          <p style="color:var(--text-2);margin-bottom:16px;font-size:14px">
+            Quieres dedicar +20 horas/semana a tu marca, pero no a editar videos. Construimos el sistema para que
+            <span class="hl">tú solo grabes</span> y un equipo opere todo lo demás.
+          </p>
+          <div class="check-list">
+            <div class="check-item"><div class="check-icon">✓</div><p>Calendario editorial multicanal: <strong>LinkedIn, Instagram, YouTube largos, Podcast propio</strong>.</p></div>
+            <div class="check-item"><div class="check-icon">✓</div><p>Pipeline de producción: tú grabas 1 vez/semana, el equipo genera ~22 piezas/semana derivadas.</p></div>
+            <div class="check-item"><div class="check-icon">✓</div><p>Incorporación operativa del <strong>Community Manager</strong> y el <strong>Editor de video</strong> (los roles que pediste en el diagnóstico).</p></div>
+            <div class="check-item"><div class="check-icon">✓</div><p>Setup de métricas: dashboard semanal de alcance, conversión a membresía y conversión a curso.</p></div>
+          </div>
+          <div style="margin-top:18px;padding:14px 18px;background:rgba(0,255,163,.06);border-left:3px solid var(--green);border-radius:0 10px 10px 0">
+            <div style="font-size:11px;letter-spacing:.18em;color:var(--green);font-weight:700;margin-bottom:6px">HITO MES 5</div>
+            <div style="font-size:14px;color:var(--text)">90 piezas publicadas en el mes sin que tú toques edición. Dashboard de tracción activo.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="p6">
+        <div class="card">
+          <h3 style="margin-bottom:8px;font-size:20px;font-weight:700">Fase 6 — Autoridad mediática · Mes 5-6</h3>
+          <p style="color:var(--text-2);margin-bottom:16px;font-size:14px">
+            Aquí entregamos lo que tú escribiste como visión 24 meses: <span class="hl">"haber logrado un posicionamiento importante
+            como conferencista, aforos de al menos 1.000 personas"</span>. Plantamos la primera bandera.
+          </p>
+          <div class="check-list">
+            <div class="check-item"><div class="check-icon">✓</div><p><strong>Booking de 1 conferencia 500+</strong> personas (gestión de aliados, gremios o evento propio).</p></div>
+            <div class="check-item"><div class="check-icon">✓</div><p><strong>Sinopsis del libro</strong> + estructura capitular + pitch editorial enviado a editoriales LATAM.</p></div>
+            <div class="check-item"><div class="check-icon">✓</div><p>Plan de PR: piezas dirigidas a 10 medios objetivo (Portafolio ya está; sumar Semana, El Tiempo, La República, Forbes Colombia).</p></div>
+            <div class="check-item"><div class="check-icon">✓</div><p><strong>Plan de continuidad post-6 meses</strong>: cómo seguimos como coproductores Hotmart y qué pasa con el equipo operativo.</p></div>
+          </div>
+          <div style="margin-top:18px;padding:14px 18px;background:rgba(0,255,163,.06);border-left:3px solid var(--green);border-radius:0 10px 10px 0">
+            <div style="font-size:11px;letter-spacing:.18em;color:var(--green);font-weight:700;margin-bottom:6px">HITO MES 6</div>
+            <div style="font-size:14px;color:var(--text)">1 conferencia 500+ confirmada + propuesta editorial enviada + plan de continuidad firmado.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. MODELO ECONÓMICO -->
+<section>
+  <div class="container">
+    <div class="sec-label">El modelo económico</div>
+    <h2 class="sec-title">No es un retainer. Es una <span class="grad">sociedad de dos capas</span>.</h2>
+    <p class="sec-lead">
+      Capa 1: fijo mensual razonable durante los 6 meses (cubre el equipo intensivo de creación).
+      Capa 2: coproducción Hotmart perpetua (donde está la cola larga real del negocio).
+    </p>
+
+    <div class="econ-grid">
+      <!-- FIJO -->
+      <div class="card">
+        <div class="card-label" style="color:var(--cyan)">CAPA 1 · FIJO MENSUAL</div>
+        <h3 style="font-size:24px;font-weight:800;margin-bottom:6px">$9.5M COP/mes</h3>
+        <p style="color:var(--text-2);font-size:14px;margin-bottom:8px">
+          Total 6 meses: <strong style="color:var(--text)">$57M COP</strong>
+        </p>
+        <table>
+          <thead>
+            <tr><th>Componente</th><th style="text-align:right">Mensual</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Jorge (estrategia, marca, reputación, plataforma)</td><td style="text-align:right">$3.8M</td></tr>
+            <tr><td>Nathalia (arquitectura pedagógica, metodología)</td><td style="text-align:right">$3.8M</td></tr>
+            <tr><td>Producción (CM + editor video + diseño)</td><td style="text-align:right">$1.9M</td></tr>
+            <tr class="total-row"><td>Total fijo</td><td style="text-align:right">$9.5M</td></tr>
+          </tbody>
+        </table>
+        <p style="color:var(--text-3);font-size:12px;margin-top:14px;font-style:italic">
+          Primer pago anticipado a la firma. Pagos siguientes día 5 de cada mes.
+        </p>
+      </div>
+
+      <!-- COPRODUCCIÓN -->
+      <div class="card">
+        <div class="card-label" style="color:var(--purple)">CAPA 2 · COPRODUCCIÓN HOTMART</div>
+        <h3 style="font-size:24px;font-weight:800;margin-bottom:6px">50 / 25 / 25</h3>
+        <p style="color:var(--text-2);font-size:14px;margin-bottom:8px">
+          Sobre todo producto digital creado/refactorizado durante el acompañamiento. <strong style="color:var(--text)">Perpetuo.</strong>
+        </p>
+        <table>
+          <thead>
+            <tr><th>Rol</th><th style="text-align:right">% Productos</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>David (rostro, marca, contenido)</td><td style="text-align:right">50%</td></tr>
+            <tr><td>Nathalia (arquitectura pedagógica · IP)</td><td style="text-align:right">25%</td></tr>
+            <tr><td>Jorge (plataforma, marca, embudo · IP)</td><td style="text-align:right">25%</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:18px;padding:14px;background:rgba(255,47,181,.06);border-radius:10px;font-size:13px;color:var(--text-2)">
+          <strong style="color:var(--pink)">Membresía cerrada — trato especial:</strong>
+          David 70% / Nathalia 15% / Jorge 15% durante los primeros 24 meses. Después se renegocia.
+          La inversión pedagógica de Nathalia en el diseño de comunidad cerrada es desproporcionada.
+        </div>
+      </div>
+    </div>
+
+    <!-- Productos esperados -->
+    <div class="card" style="margin-top:24px">
+      <div class="card-label">Productos esperados que entran a coproducción</div>
+      <div class="grid-3" style="margin-top:14px">
+        <div style="padding:14px;background:var(--bg-2);border-radius:10px;border:1px solid var(--border)">
+          <div style="font-weight:700;font-size:14px;margin-bottom:4px">Transformación Financiera 2.0</div>
+          <div style="font-size:12px;color:var(--text-3)">Refactor del curso actual (Fase 4)</div>
+        </div>
+        <div style="padding:14px;background:var(--bg-2);border-radius:10px;border:1px solid var(--border)">
+          <div style="font-weight:700;font-size:14px;margin-bottom:4px">Curso Intermedio</div>
+          <div style="font-size:12px;color:var(--text-3)">Producto nuevo de la escalera (Fase 4)</div>
+        </div>
+        <div style="padding:14px;background:var(--bg-2);border-radius:10px;border:1px solid var(--border)">
+          <div style="font-weight:700;font-size:14px;margin-bottom:4px">Curso Avanzado / Masterclass</div>
+          <div style="font-size:12px;color:var(--text-3)">Producto premium (Fase 4-5)</div>
+        </div>
+        <div style="padding:14px;background:linear-gradient(135deg,rgba(255,47,181,.08),rgba(123,47,255,.08));border-radius:10px;border:1px solid var(--border-strong)">
+          <div style="font-weight:700;font-size:14px;margin-bottom:4px">Membresía Fundadora ⭐</div>
+          <div style="font-size:12px;color:var(--text-3)">Motor recurrente · trato especial</div>
+        </div>
+        <div style="padding:14px;background:var(--bg-2);border-radius:10px;border:1px solid var(--border)">
+          <div style="font-weight:700;font-size:14px;margin-bottom:4px">Libro Digital / Ebook</div>
+          <div style="font-size:12px;color:var(--text-3)">Producto autoridad (Fase 5-6)</div>
+        </div>
+        <div style="padding:14px;background:var(--bg-2);border-radius:10px;border:1px solid var(--border)">
+          <div style="font-weight:700;font-size:14px;margin-bottom:4px">Otros derivados</div>
+          <div style="font-size:12px;color:var(--text-3)">Lo que lancemos durante el acompañamiento</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. SIMULADOR -->
+<section>
+  <div class="container">
+    <div class="sec-label">Simulador de retorno</div>
+    <h2 class="sec-title">Mueve los números. <span class="grad">Esto es lo que pasaría.</span></h2>
+    <p class="sec-lead">
+      Ajusta las ventas mensuales esperadas y ve en tiempo real cuánto te queda a ti, cuánto a Nathalia & Jorge,
+      y cuánto el modelo se autosostiene una vez termine el acompañamiento.
+    </p>
+
+    <div class="sim">
+      <h3>¿Cuánto valen los 24 meses, no los 6?</h3>
+      <p class="sim-lead">El acompañamiento dura 6 meses. El ecosistema dura años.</p>
+
+      <div class="sim-grid">
+        <div>
+          <div class="slider-row">
+            <div class="slider-label">
+              <span class="name">Ventas mensuales totales en Hotmart (a partir del mes 6)</span>
+              <span class="val" id="vSales">$50M</span>
+            </div>
+            <input type="range" id="rSales" min="10" max="120" value="50" step="5">
+          </div>
+          <div class="slider-row">
+            <div class="slider-label">
+              <span class="name">% de ventas que viene de membresía recurrente</span>
+              <span class="val" id="vMem">40%</span>
+            </div>
+            <input type="range" id="rMem" min="0" max="100" value="40" step="5">
+          </div>
+          <div class="slider-row">
+            <div class="slider-label">
+              <span class="name">Horizonte de cálculo (meses post-acompañamiento)</span>
+              <span class="val" id="vHoriz">18 meses</span>
+            </div>
+            <input type="range" id="rHoriz" min="6" max="36" value="18" step="3">
+          </div>
+
+          <div style="margin-top:24px;padding:14px;background:rgba(255,140,0,.06);border-left:3px solid var(--orange);border-radius:0 10px 10px 0;font-size:13px;color:var(--text-2)">
+            <strong style="color:var(--orange)">Importante:</strong> esto cubre solo ingresos Hotmart coproducidos.
+            <strong style="color:var(--text)">Conferencias, libro físico, app, 1:1, asesorías corporativas</strong> quedan 100% para David.
+          </div>
+        </div>
+
+        <div class="sim-result">
+          <h4>Reparto mensual (en estado estable)</h4>
+          <div class="sim-row"><span class="who">David Aponte</span><span class="amt" id="rDavid">$0</span></div>
+          <div class="sim-row"><span class="who">Nathalia</span><span class="amt" id="rNat">$0</span></div>
+          <div class="sim-row"><span class="who">Jorge</span><span class="amt" id="rJor">$0</span></div>
+
+          <h4 style="margin-top:24px">Acumulado en el horizonte</h4>
+          <div class="sim-row you"><span class="who">Para David acumulado</span><span class="amt" id="aDavid">$0</span></div>
+          <div class="sim-row"><span class="who">Para Nathalia acumulado</span><span class="amt" id="aNat">$0</span></div>
+          <div class="sim-row"><span class="who">Para Jorge acumulado</span><span class="amt" id="aJor">$0</span></div>
+
+          <div class="sim-row month">
+            <span class="who">Inversión fija pagada</span><span class="amt" style="color:var(--text-3);font-size:14px">$57M COP</span>
+          </div>
+          <div class="sim-row">
+            <span class="who" style="color:var(--green);font-weight:600">ROI David (acumulado vs inversión)</span>
+            <span class="amt" style="color:var(--green)" id="roi">0x</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. CLÁUSULAS -->
+<section>
+  <div class="container">
+    <div class="sec-label">Blindaje de ambos lados</div>
+    <h2 class="sec-title">Las <span class="grad">cláusulas</span> que protegen a todos.</h2>
+    <p class="sec-lead">
+      Esto no es un contrato a ciegas. Estos son los compromisos cruzados que blindan tanto tu inversión
+      como nuestro trabajo.
+    </p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4 style="font-weight:700;font-size:16px;margin-bottom:14px;color:var(--cyan)">🛡️ Lo que te protege a ti</h4>
+        <div class="check-list">
+          <div class="check-item"><div class="check-icon">✓</div><p><strong>Hitos verificables cada fase.</strong> Si no cumplimos el hito, el mes siguiente va sin cargo hasta corregir.</p></div>
+          <div class="check-item"><div class="check-icon">✓</div><p><strong>Reporte mensual de avance</strong> + sesión semanal de 60 min (lo que pediste en el diagnóstico).</p></div>
+          <div class="check-item"><div class="check-icon">✓</div><p><strong>Toda la IP queda a tu nombre</strong> (cursos, libro, app). Nosotros solo participamos del flujo Hotmart pactado.</p></div>
+          <div class="check-item"><div class="check-icon">✓</div><p><strong>Coproducción registrada contractualmente</strong> en cuenta de codistribución Hotmart. No es apretón de manos.</p></div>
+          <div class="check-item"><div class="check-icon">✓</div><p><strong>Cláusula de salida</strong> si después de 2 fases consecutivas no cumplimos hitos.</p></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4 style="font-weight:700;font-size:16px;margin-bottom:14px;color:var(--purple)">🤝 Lo que nos protege a nosotros</h4>
+        <div class="check-list">
+          <div class="check-item"><div class="check-icon">✓</div><p><strong>Compromiso 6 meses</strong> con pago mensual asegurado mientras cumplamos hitos.</p></div>
+          <div class="check-item"><div class="check-icon">✓</div><p><strong>Exclusividad durante 6 meses:</strong> no contratas otra agencia/consultor que duplique funciones nuestras.</p></div>
+          <div class="check-item"><div class="check-icon">✓</div><p><strong>Coproducción Hotmart perpetua</strong> sobre los productos creados o refactorizados durante el acompañamiento.</p></div>
+          <div class="check-item"><div class="check-icon">✓</div><p><strong>Disponibilidad y entrega de tu parte:</strong> sesión semanal, materiales solicitados, grabaciones programadas.</p></div>
+          <div class="check-item"><div class="check-icon">✓</div><p><strong>Confidencialidad mutua</strong> sobre la propuesta, números, métricas y desarrollos.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. CTA -->
+<section>
+  <div class="container">
+    <div class="cta-box">
+      <div class="sec-label" style="margin-bottom:14px">¿Y ahora?</div>
+      <h2>Esto no termina en una firma.<br>Empieza en una conversación.</h2>
+      <p>
+        Si esta propuesta tiene sentido para ti, agendemos una sesión de 60 minutos para resolver
+        dudas, ajustar lo que haya que ajustar y arrancar el lunes siguiente.
+      </p>
+      <a href="#" class="cta-btn">Agendar sesión de decisión →</a>
+      <div style="margin-top:24px;font-size:13px;color:var(--text-3)">
+        Esta propuesta es válida por <strong style="color:var(--text-2)">15 días</strong> desde su entrega.
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    Nathalia <span style="color:var(--purple)">&</span> Jorge · Acompañamiento estratégico para David Alexander Aponte Becerra<br>
+    Propuesta generada a partir del diagnóstico del 22 de mayo de 2026 · Confidencial
+  </div>
+</footer>
+
+<script>
+/* ===== RADAR CHART ===== */
+const radarCtx = document.getElementById('radarChart').getContext('2d');
+new Chart(radarCtx, {
+  type: 'radar',
+  data: {
+    labels: ['Visión','Monetización','Tiempo','Audiencia','Cursos','Métricas','Inversión','Estilo'],
+    datasets: [{
+      label: 'Madurez David',
+      data: [78,83,83,67,67,80,68,75],
+      backgroundColor: 'rgba(0,212,255,.18)',
+      borderColor: '#00d4ff',
+      borderWidth: 2,
+      pointBackgroundColor: '#7b2fff',
+      pointRadius: 4,
+      pointHoverRadius: 6
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      r: {
+        min: 0, max: 100,
+        ticks: { color: 'rgba(255,255,255,.3)', backdropColor: 'transparent', stepSize: 25, font:{size:10} },
+        grid: { color: 'rgba(255,255,255,.08)' },
+        angleLines: { color: 'rgba(255,255,255,.1)' },
+        pointLabels: { color: 'rgba(255,255,255,.8)', font:{size:11,weight:'600'} }
+      }
+    }
+  }
+});
+
+/* ===== TABS ===== */
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById(t.dataset.target).classList.add('active');
+  });
+});
+
+/* ===== SIMULADOR ===== */
+const rSales = document.getElementById('rSales');
+const rMem   = document.getElementById('rMem');
+const rHoriz = document.getElementById('rHoriz');
+const fmt = n => '$' + n.toFixed(1).replace(/\.0$/,'') + 'M';
+
+function calc(){
+  const sales = parseInt(rSales.value);      // total millones/mes
+  const memPct = parseInt(rMem.value)/100;   // % en membresía
+  const horiz = parseInt(rHoriz.value);      // meses
+
+  const memSales = sales * memPct;           // millones/mes en membresía
+  const prodSales = sales * (1-memPct);      // millones/mes en otros productos
+
+  // Reparto mensual
+  const davidMonth = memSales*0.70 + prodSales*0.50;
+  const natMonth   = memSales*0.15 + prodSales*0.25;
+  const jorMonth   = memSales*0.15 + prodSales*0.25;
+
+  // Acumulado
+  const davidAcc = davidMonth * horiz;
+  const natAcc   = natMonth   * horiz;
+  const jorAcc   = jorMonth   * horiz;
+  const roi = davidAcc / 57; // inversión fija $57M
+
+  document.getElementById('vSales').textContent = fmt(sales);
+  document.getElementById('vMem').textContent   = (memPct*100).toFixed(0) + '%';
+  document.getElementById('vHoriz').textContent = horiz + ' meses';
+
+  document.getElementById('rDavid').textContent = fmt(davidMonth);
+  document.getElementById('rNat').textContent   = fmt(natMonth);
+  document.getElementById('rJor').textContent   = fmt(jorMonth);
+
+  document.getElementById('aDavid').textContent = fmt(davidAcc);
+  document.getElementById('aNat').textContent   = fmt(natAcc);
+  document.getElementById('aJor').textContent   = fmt(jorAcc);
+
+  document.getElementById('roi').textContent    = roi.toFixed(1) + 'x';
+}
+[rSales, rMem, rHoriz].forEach(el => el.addEventListener('input', calc));
+calc();
+</script>
+</body>
+</html>
