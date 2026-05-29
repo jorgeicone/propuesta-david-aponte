@@ -13,27 +13,26 @@
    TOKENS - OKLCH color system, type scale, motion curves
    ============================================================ */
 :root {
-  /* Color system (Committed strategy with cobalt accent) */
   --bg:           oklch(0.16 0.018 250);
   --bg-2:         oklch(0.19 0.018 250);
   --surface-1:    oklch(0.22 0.020 250);
   --surface-2:    oklch(0.27 0.022 250);
   --border-soft:  oklch(0.30 0.020 250 / 0.45);
-  --border:      oklch(0.38 0.028 250);
+  --border:       oklch(0.38 0.028 250);
   --border-strong: oklch(0.52 0.035 250);
-  --ink:         oklch(0.98 0.005 250);
-  --ink-muted:   oklch(0.74 0.014 250);
-  --ink-faint:   oklch(0.56 0.012 250);
-  --accent:      oklch(0.70 0.18 245);
-  --accent-hi:   oklch(0.78 0.16 245);
-  --accent-soft: oklch(0.70 0.18 245 / 0.12);
-  --accent-edge: oklch(0.70 0.18 245 / 0.32);
-  --success:     oklch(0.74 0.14 155);
-  --success-soft: oklch(0.74 0.14 155 / 0.12);
-  --warn:        oklch(0.78 0.16 75);
-  --warn-soft:   oklch(0.78 0.16 75 / 0.12);
+  --ink:          oklch(0.98 0.005 250);
+  --ink-muted:    oklch(0.78 0.014 250);
+  --ink-faint:    oklch(0.60 0.012 250);
+  --accent:       oklch(0.70 0.18 245);
+  --accent-hi:    oklch(0.80 0.16 245);
+  --accent-soft:  oklch(0.70 0.18 245 / 0.12);
+  --accent-edge:  oklch(0.70 0.18 245 / 0.34);
+  --accent-glow:  oklch(0.70 0.18 245 / 0.5);
+  --success:      oklch(0.78 0.16 155);
+  --success-soft: oklch(0.78 0.16 155 / 0.12);
+  --warn:         oklch(0.80 0.16 75);
+  --warn-soft:    oklch(0.80 0.16 75 / 0.12);
 
-  /* Typography */
   --font-display: 'Geist', system-ui, -apple-system, sans-serif;
   --font-body:    'Geist', system-ui, -apple-system, sans-serif;
   --font-mono:    'Geist Mono', ui-monospace, monospace;
@@ -47,8 +46,6 @@
   --tx-xs: 0.75rem;
   --tx-micro: 0.6875rem;
 
-  /* Spacing rhythm */
-  --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
@@ -56,28 +53,27 @@
   --space-8: 2rem;
   --space-12: 3rem;
   --space-16: 4rem;
-  --space-20: 5rem;
   --space-24: 6rem;
-  --space-32: 8rem;
 
-  /* Radius scale (locked single system: 6/10/16/full) */
   --r-sm: 6px;
   --r-md: 10px;
   --r-lg: 16px;
+  --r-xl: 24px;
   --r-pill: 999px;
 
-  /* Motion */
+  /* Emil's strong ease-out curves */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quart: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --dur-fast: 120ms;
   --dur-med: 240ms;
   --dur-slow: 480ms;
 
-  /* Z-scale semantic */
+  --z-bg: -1;
+  --z-content: 1;
   --z-sticky: 50;
   --z-overlay: 100;
-  --z-modal: 200;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -98,18 +94,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Subtle ambient field, no AI-purple mesh */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(60% 50% at 12% 5%, oklch(0.70 0.18 245 / 0.10), transparent 60%),
-    radial-gradient(40% 40% at 92% 18%, oklch(0.70 0.18 245 / 0.06), transparent 65%);
-}
-
 img { display: block; max-width: 100%; height: auto; }
 button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
 a { color: inherit; text-decoration: none; }
@@ -117,15 +101,15 @@ a { color: inherit; text-decoration: none; }
 .container { max-width: 1280px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2.5rem); }
 
 /* ============================================================
-   TOP STRIP (no eyebrow inflation, brand sigil + status only)
+   TOP STRIP
    ============================================================ */
 .topstrip {
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
-  background: oklch(0.16 0.018 250 / 0.78);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  background: oklch(0.16 0.018 250 / 0.7);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
   border-bottom: 1px solid var(--border-soft);
 }
 .topstrip-inner {
@@ -140,28 +124,27 @@ a { color: inherit; text-decoration: none; }
 .sigil {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   font-family: var(--font-display);
   font-size: var(--tx-sm);
   font-weight: 600;
   letter-spacing: -0.01em;
 }
 .sigil-mark {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   border-radius: var(--r-sm);
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent), oklch(0.45 0.18 245));
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 14px var(--accent-glow);
 }
 .sigil-mark::after {
   content: "";
   position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(135deg, oklch(0.95 0.04 245) 0%, transparent 50%),
-    linear-gradient(315deg, oklch(0.30 0.10 245) 0%, transparent 60%);
-  opacity: 0.65;
+  inset: 1px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, oklch(0.98 0.04 245 / 0.18), transparent 60%);
 }
 .status-pill {
   font-family: var(--font-mono);
@@ -183,17 +166,46 @@ a { color: inherit; text-decoration: none; }
   height: 6px;
   border-radius: var(--r-pill);
   background: var(--success);
-  box-shadow: 0 0 8px var(--success);
+  box-shadow: 0 0 10px var(--success);
+  animation: livedot 2s ease-in-out infinite;
+}
+@keyframes livedot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .status-pill::before { animation: none; }
 }
 
 /* ============================================================
-   HERO - asymmetric split, expediente panel right
+   HERO - Vanta NET background + asymmetric content
    ============================================================ */
 .hero {
-  padding: clamp(4rem, 8vw, 7rem) 0 clamp(3rem, 6vw, 5rem);
   position: relative;
+  padding: clamp(4rem, 8vw, 7rem) 0 clamp(3rem, 6vw, 5rem);
+  overflow: hidden;
+  isolation: isolate;
 }
+
+#hero-vanta {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-bg);
+  pointer-events: none;
+}
+#hero-vanta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, transparent 0%, var(--bg) 70%),
+    linear-gradient(180deg, transparent 60%, var(--bg) 100%);
+  pointer-events: none;
+}
+
 .hero-grid {
+  position: relative;
+  z-index: var(--z-content);
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.95fr);
   gap: clamp(2rem, 5vw, 4.5rem);
@@ -209,7 +221,7 @@ a { color: inherit; text-decoration: none; }
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--ink-muted);
   margin-bottom: var(--space-8);
   display: flex;
   align-items: center;
@@ -250,10 +262,7 @@ h1.hero-title .accent {
   text-wrap: pretty;
   margin-bottom: var(--space-8);
 }
-.hero-sub strong {
-  color: var(--ink);
-  font-weight: 500;
-}
+.hero-sub strong { color: var(--ink); font-weight: 500; }
 
 .hero-ctas {
   display: flex;
@@ -273,7 +282,8 @@ h1.hero-title .accent {
   font-size: var(--tx-sm);
   letter-spacing: -0.005em;
   transition: transform var(--dur-fast) var(--ease-out-quart),
-              background-color var(--dur-med) var(--ease-out-quart);
+              background-color var(--dur-med) var(--ease-out-quart),
+              box-shadow var(--dur-med) var(--ease-out-quart);
   will-change: transform;
 }
 .btn:active { transform: scale(0.97); }
@@ -281,33 +291,50 @@ h1.hero-title .accent {
   background: var(--accent);
   color: oklch(0.14 0.020 245);
   font-weight: 600;
+  box-shadow: 0 8px 24px var(--accent-glow);
 }
-.btn-primary:hover { background: var(--accent-hi); }
+.btn-primary:hover {
+  background: var(--accent-hi);
+  box-shadow: 0 12px 32px var(--accent-glow);
+  transform: translateY(-1px);
+}
+.btn-primary:active { transform: translateY(0) scale(0.97); }
 .btn-ghost {
   color: var(--ink);
   border: 1px solid var(--border);
+  background: oklch(0.16 0.018 250 / 0.4);
+  backdrop-filter: blur(10px);
 }
-.btn-ghost:hover { background: var(--surface-1); border-color: var(--border-strong); }
+.btn-ghost:hover {
+  background: var(--surface-1);
+  border-color: var(--border-strong);
+}
 .btn-arrow {
   display: inline-block;
   transition: transform var(--dur-fast) var(--ease-out-quart);
 }
-.btn:hover .btn-arrow { transform: translateX(2px); }
+.btn:hover .btn-arrow { transform: translateX(3px); }
 
 @media (prefers-reduced-motion: reduce) {
-  .btn, .btn-arrow { transition: none; }
+  .btn, .btn-arrow, .btn:hover { transition: none; transform: none; }
 }
 
-/* Expediente / memo panel */
+/* Expediente / memo panel - with Vanilla Tilt support */
 .memo {
-  background: var(--surface-1);
+  background: oklch(0.20 0.022 250 / 0.65);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
   border: 1px solid var(--border-soft);
   border-radius: var(--r-lg);
   padding: clamp(1.25rem, 2.5vw, 1.75rem);
   font-family: var(--font-mono);
   font-size: var(--tx-xs);
   color: var(--ink-muted);
+  transform-style: preserve-3d;
+  box-shadow: 0 24px 60px oklch(0.04 0.020 250 / 0.5),
+              inset 0 1px 0 oklch(0.98 0.005 250 / 0.06);
 }
+.memo > * { transform: translateZ(20px); }
 .memo-head {
   display: flex;
   justify-content: space-between;
@@ -321,7 +348,7 @@ h1.hero-title .accent {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--accent-hi);
-  font-weight: 500;
+  font-weight: 600;
 }
 .memo-case {
   font-size: var(--tx-micro);
@@ -383,7 +410,7 @@ h2.section-title em {
 .section-lead strong { color: var(--ink); font-weight: 500; }
 
 /* ============================================================
-   MOMENTO CERO - statbar no-cards
+   MOMENTO CERO - statbar with count-up animation
    ============================================================ */
 .statbar {
   display: grid;
@@ -391,6 +418,25 @@ h2.section-title em {
   border-top: 1px solid var(--border-soft);
   border-bottom: 1px solid var(--border-soft);
   margin-bottom: var(--space-12);
+  position: relative;
+}
+.statbar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--accent-edge), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: scanLine 3s var(--ease-out-expo) forwards;
+}
+@keyframes scanLine {
+  to { transform: scaleX(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .statbar::before { display: none; }
 }
 @media (max-width: 720px) { .statbar { grid-template-columns: 1fr 1fr; } }
 .stat {
@@ -412,6 +458,7 @@ h2.section-title em {
   color: var(--ink);
   margin-bottom: var(--space-3);
   font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
 }
 .stat-num .frac {
   font-size: 0.5em;
@@ -462,7 +509,7 @@ h2.section-title em {
 .momento-p strong { color: var(--ink); font-weight: 500; }
 
 /* ============================================================
-   PERFIL - editorial layout
+   PERFIL - asymmetric editorial
    ============================================================ */
 .perfil-wrap {
   display: grid;
@@ -497,6 +544,7 @@ h2.section-title em {
   letter-spacing: -0.02em;
   margin-left: 12px;
   vertical-align: middle;
+  font-feature-settings: "tnum";
 }
 .arch-body {
   font-size: 1.025rem;
@@ -525,33 +573,63 @@ h2.section-title em {
   color: var(--ink-faint);
   margin-bottom: var(--space-2);
 }
-.arch-row {
-  display: flex;
-  justify-content: space-between;
+
+/* Animated archetype bars (GSAP scrolltrigger) */
+.arch-bar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-2);
   align-items: baseline;
-  gap: var(--space-3);
   padding: 12px 0;
   border-bottom: 1px solid var(--border-soft);
+  position: relative;
 }
-.arch-row:last-child { border-bottom: none; }
-.arch-row-name {
+.arch-bar:last-child { border-bottom: none; }
+.arch-bar-name {
   font-size: var(--tx-sm);
   color: var(--ink);
   font-weight: 500;
 }
-.arch-row-pct {
+.arch-bar-pct {
   font-family: var(--font-mono);
   font-size: var(--tx-sm);
   color: var(--ink-muted);
   font-feature-settings: "tnum";
 }
+.arch-bar-track {
+  grid-column: 1 / -1;
+  height: 3px;
+  border-radius: var(--r-pill);
+  background: oklch(0.30 0.020 250 / 0.5);
+  margin-top: 8px;
+  overflow: hidden;
+}
+.arch-bar-fill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-hi));
+  border-radius: var(--r-pill);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
 
-/* Editorial pull-quote (objeción) */
+/* Editorial pull-quote */
 .pullquote {
   margin-top: clamp(2.5rem, 5vw, 4rem);
   padding: clamp(2rem, 4vw, 3rem) 0;
   border-top: 1px solid var(--border-soft);
   border-bottom: 1px solid var(--border-soft);
+  position: relative;
+}
+.pullquote::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  height: 1px;
+  width: 80px;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
 }
 .pullquote-tag {
   font-family: var(--font-mono);
@@ -581,7 +659,7 @@ h2.section-title em {
 }
 
 /* ============================================================
-   ANCLAS (3 funcionales, no numeradas como decoración)
+   ANCLAS
    ============================================================ */
 .anclas {
   display: grid;
@@ -597,7 +675,9 @@ h2.section-title em {
 .ancla-cell {
   background: var(--bg);
   padding: clamp(1.5rem, 3vw, 2rem);
+  transition: background-color var(--dur-med) var(--ease-out-quart);
 }
+.ancla-cell:hover { background: var(--surface-1); }
 .ancla-key {
   font-family: var(--font-mono);
   font-size: var(--tx-micro);
@@ -623,21 +703,26 @@ h2.section-title em {
 .ancla-p strong { color: var(--ink); font-weight: 500; }
 
 /* ============================================================
-   TIMELINE - 7 nodes, horizontal track
+   TIMELINE
    ============================================================ */
-.timeline-section { padding-top: 0; }
-
-.timeline {
-  position: relative;
-  padding: clamp(2rem, 4vw, 3rem) 0 0;
-}
+.timeline-wrap { position: relative; padding: clamp(2rem, 4vw, 3rem) 0 0; }
+.timeline-track-wrap { position: relative; padding-top: 28px; }
 .timeline-track {
   position: absolute;
-  top: clamp(2rem, 4vw, 3rem);
-  left: 0;
-  right: 0;
+  top: 28px;
+  left: 7%;
+  right: 7%;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--border) 8%, var(--border) 92%, transparent);
+}
+.timeline-progress {
+  position: absolute;
+  top: 28px;
+  left: 7%;
+  height: 1px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-hi));
+  box-shadow: 0 0 8px var(--accent-glow);
 }
 .timeline-nodes {
   display: grid;
@@ -645,21 +730,19 @@ h2.section-title em {
   gap: var(--space-2);
   position: relative;
 }
-@media (max-width: 900px) { .timeline-nodes { grid-template-columns: repeat(4, 1fr); gap: var(--space-4); } }
+@media (max-width: 900px) { .timeline-nodes { grid-template-columns: repeat(4, 1fr); gap: var(--space-4); } .timeline-track, .timeline-progress { display: none; } }
 @media (max-width: 560px) { .timeline-nodes { grid-template-columns: repeat(2, 1fr); } }
-.timeline-track-wrap { position: relative; padding-top: 28px; }
 
 .tnode {
   text-align: center;
   cursor: pointer;
   transition: transform var(--dur-med) var(--ease-out-quart);
 }
-.tnode:hover { transform: translateY(-3px); }
+.tnode:hover { transform: translateY(-4px); }
 .tnode:active { transform: translateY(-1px) scale(0.98); }
 @media (prefers-reduced-motion: reduce) {
   .tnode, .tnode:hover, .tnode:active { transition: none; transform: none; }
 }
-
 .tnode-dot {
   width: 14px;
   height: 14px;
@@ -669,14 +752,19 @@ h2.section-title em {
   margin: 0 auto 14px;
   position: relative;
   transition: border-color var(--dur-med) var(--ease-out-quart),
-              box-shadow var(--dur-med) var(--ease-out-quart);
+              box-shadow var(--dur-med) var(--ease-out-quart),
+              background-color var(--dur-med) var(--ease-out-quart);
 }
 .tnode:hover .tnode-dot {
   border-color: var(--accent);
-  box-shadow: 0 0 0 4px var(--accent-soft);
+  box-shadow: 0 0 0 5px var(--accent-soft), 0 0 18px var(--accent-glow);
+  background: var(--accent);
 }
-.tnode.is-zero .tnode-dot { background: var(--accent); border-color: var(--accent); }
-
+.tnode.is-zero .tnode-dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft), 0 0 16px var(--accent-glow);
+}
 .tnode-num {
   font-family: var(--font-mono);
   font-size: var(--tx-micro);
@@ -700,7 +788,6 @@ h2.section-title em {
    TABS + PHASE
    ============================================================ */
 .phase-section { margin-top: clamp(3rem, 5vw, 4rem); }
-
 .tabs {
   display: flex;
   gap: 2px;
@@ -735,7 +822,7 @@ h2.section-title em {
   background: var(--bg);
   color: var(--ink);
   box-shadow: 0 1px 0 oklch(0.95 0.005 250 / 0.04) inset,
-              0 6px 20px oklch(0.10 0.020 250 / 0.5);
+              0 8px 24px oklch(0.06 0.020 250 / 0.6);
 }
 .tab .tab-num {
   font-family: var(--font-mono);
@@ -745,9 +832,7 @@ h2.section-title em {
   font-weight: 500;
 }
 .tab.is-active .tab-num { color: var(--accent-hi); }
-@media (prefers-reduced-motion: reduce) {
-  .tab { transition: none; }
-}
+@media (prefers-reduced-motion: reduce) { .tab { transition: none; } }
 
 .tabpanel { display: none; }
 .tabpanel.is-active {
@@ -755,14 +840,11 @@ h2.section-title em {
   animation: panelIn var(--dur-slow) var(--ease-out-expo);
 }
 @keyframes panelIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(12px); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
-@media (prefers-reduced-motion: reduce) {
-  .tabpanel.is-active { animation: none; }
-}
+@media (prefers-reduced-motion: reduce) { .tabpanel.is-active { animation: none; } }
 
-/* Phase block */
 .phase {
   background: var(--surface-1);
   border: 1px solid var(--border-soft);
@@ -814,7 +896,6 @@ h2.section-title em {
   border-radius: var(--r-pill);
   background: var(--ink-faint);
 }
-
 .phase-intro {
   font-size: 1.025rem;
   color: var(--ink-muted);
@@ -845,9 +926,10 @@ h2.section-title em {
   background: var(--bg-2);
   border: 1px solid var(--border-soft);
   border-radius: var(--r-md);
-  transition: border-color var(--dur-med) var(--ease-out-quart);
+  transition: border-color var(--dur-med) var(--ease-out-quart),
+              background-color var(--dur-med) var(--ease-out-quart);
 }
-.check:hover { border-color: var(--border); }
+.check:hover { border-color: var(--border); background: var(--surface-1); }
 .check-mark {
   width: 24px;
   height: 24px;
@@ -872,11 +954,22 @@ h2.section-title em {
   margin-top: var(--space-8);
   padding: var(--space-6);
   background: var(--success-soft);
-  border: 1px solid oklch(0.74 0.14 155 / 0.25);
+  border: 1px solid oklch(0.78 0.16 155 / 0.28);
   border-radius: var(--r-md);
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-2);
+  position: relative;
+  overflow: hidden;
+}
+.hito::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--success), transparent);
 }
 .hito-label {
   font-family: var(--font-mono);
@@ -895,7 +988,7 @@ h2.section-title em {
 }
 
 /* ============================================================
-   ECONOMÍA - 2 capas
+   ECONOMÍA
    ============================================================ */
 .econ {
   display: grid;
@@ -992,7 +1085,6 @@ h2.section-title em {
 }
 .member-note strong { color: var(--accent-hi); font-weight: 500; }
 
-/* Productos */
 .productos-wrap { margin-top: clamp(2.5rem, 4vw, 3rem); }
 .productos-head {
   font-family: var(--font-mono);
@@ -1014,9 +1106,10 @@ h2.section-title em {
   background: var(--surface-1);
   border: 1px solid var(--border-soft);
   border-radius: var(--r-md);
-  transition: border-color var(--dur-med) var(--ease-out-quart);
+  transition: border-color var(--dur-med) var(--ease-out-quart),
+              transform var(--dur-med) var(--ease-out-quart);
 }
-.prod:hover { border-color: var(--border); }
+.prod:hover { border-color: var(--border); transform: translateY(-2px); }
 .prod.featured {
   background: linear-gradient(180deg, var(--accent-soft), var(--surface-1));
   border-color: var(--accent-edge);
@@ -1049,6 +1142,18 @@ h2.section-title em {
   border-radius: var(--r-lg);
   padding: clamp(2rem, 4vw, 2.5rem);
   margin-top: clamp(2rem, 4vw, 3rem);
+  position: relative;
+  overflow: hidden;
+}
+.sim::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle at top right, var(--accent-soft), transparent 70%);
+  pointer-events: none;
 }
 .sim-head {
   display: flex;
@@ -1057,6 +1162,7 @@ h2.section-title em {
   gap: var(--space-6);
   margin-bottom: var(--space-8);
   flex-wrap: wrap;
+  position: relative;
 }
 .sim-title {
   font-family: var(--font-display);
@@ -1073,6 +1179,7 @@ h2.section-title em {
   grid-template-columns: 1fr 1.1fr;
   gap: clamp(2rem, 4vw, 3rem);
   align-items: start;
+  position: relative;
 }
 @media (max-width: 880px) { .sim-grid { grid-template-columns: 1fr; } }
 
@@ -1111,25 +1218,23 @@ input[type="range"] {
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: var(--r-pill);
   background: var(--accent);
   border: 2px solid var(--bg);
   cursor: pointer;
   transition: transform var(--dur-fast) var(--ease-out-quart),
               box-shadow var(--dur-med) var(--ease-out-quart);
-  box-shadow: 0 0 0 0 var(--accent-soft);
+  box-shadow: 0 0 0 0 var(--accent-soft), 0 4px 14px var(--accent-glow);
 }
 input[type="range"]::-webkit-slider-thumb:hover {
-  box-shadow: 0 0 0 6px var(--accent-soft);
+  box-shadow: 0 0 0 8px var(--accent-soft), 0 8px 18px var(--accent-glow);
 }
-input[type="range"]:active::-webkit-slider-thumb {
-  transform: scale(1.12);
-}
+input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.12); }
 input[type="range"]::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: var(--r-pill);
   background: var(--accent);
   border: 2px solid var(--bg);
@@ -1179,13 +1284,20 @@ input[type="range"]::-moz-range-thumb {
 .sim-row.roi {
   background: var(--success-soft);
   margin-top: var(--space-3);
-  padding: 14px var(--space-4);
+  padding: 16px var(--space-4);
   border-radius: var(--r-md);
   border-bottom: none;
-  border: 1px solid oklch(0.74 0.14 155 / 0.25);
+  border: 1px solid oklch(0.78 0.16 155 / 0.28);
 }
-.sim-row.roi .sim-who { color: var(--success); font-weight: 600; font-family: var(--font-mono); font-size: var(--tx-micro); letter-spacing: 0.14em; text-transform: uppercase; }
-.sim-row.roi .sim-amt { color: var(--success); font-size: 1.5rem; }
+.sim-row.roi .sim-who {
+  color: var(--success);
+  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: var(--tx-micro);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.sim-row.roi .sim-amt { color: var(--success); font-size: 1.625rem; }
 
 .sim-note {
   margin-top: var(--space-6);
@@ -1222,27 +1334,18 @@ input[type="range"]::-moz-range-thumb {
   padding-bottom: var(--space-4);
   border-bottom: 1px solid var(--border-soft);
 }
-.clausula-h {
-  font-family: var(--font-display);
-  font-size: 1.125rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-}
 .clausula-tag {
   font-family: var(--font-mono);
   font-size: var(--tx-micro);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent-hi);
-  padding: 4px 10px;
+  padding: 5px 11px;
   background: var(--accent-soft);
   border-radius: var(--r-pill);
   font-weight: 500;
 }
-.clausula-list {
-  display: grid;
-  gap: var(--space-3);
-}
+.clausula-list { display: grid; gap: var(--space-3); }
 
 /* ============================================================
    CTA FINAL
@@ -1287,6 +1390,11 @@ input[type="range"]::-moz-range-thumb {
   margin-left: auto;
   margin-right: auto;
 }
+.cta-h em {
+  color: var(--accent-hi);
+  font-style: italic;
+  font-weight: 500;
+}
 .cta-p {
   font-size: 1.025rem;
   color: var(--ink-muted);
@@ -1305,9 +1413,6 @@ input[type="range"]::-moz-range-thumb {
 }
 .cta-validity strong { color: var(--ink-muted); font-weight: 500; }
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
 footer {
   padding: clamp(3rem, 5vw, 4rem) 0;
   border-top: 1px solid var(--border-soft);
@@ -1323,23 +1428,23 @@ footer {
 footer strong { color: var(--ink-muted); font-weight: 500; }
 
 /* ============================================================
-   REVEAL ENTRY (only enhances visible default, never gates)
+   REVEAL ENTRY (default visible, JS-enhanced)
+   Per Impeccable: reveal MUST enhance visible default, never gate
    ============================================================ */
-.reveal {
+.reveal { opacity: 1; transform: translateY(0); }
+.js-on .reveal {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.js-on .reveal.in {
   opacity: 1;
   transform: translateY(0);
+  transition: opacity 0.8s var(--ease-out-expo),
+              transform 0.8s var(--ease-out-expo);
 }
-@media (prefers-reduced-motion: no-preference) {
-  .js-ready .reveal {
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity var(--dur-slow) var(--ease-out-expo),
-                transform var(--dur-slow) var(--ease-out-expo);
-  }
-  .js-ready .reveal.in {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@media (prefers-reduced-motion: reduce) {
+  .js-on .reveal { opacity: 1; transform: none; }
+  .js-on .reveal.in { transition: none; }
 }
 </style>
 </head>
@@ -1355,35 +1460,38 @@ footer strong { color: var(--ink-muted); font-weight: 500; }
   </div>
 </div>
 
-<!-- =================== HERO =================== -->
-<header class="hero container">
-  <div class="hero-grid">
-    <div class="reveal">
-      <div class="hero-eyebrow">Acompañamiento estratégico, 6 meses</div>
-      <h1 class="hero-title">Construyamos juntos el ecosistema que tu <span class="accent">visión a 24 meses</span> exige.</h1>
-      <p class="hero-sub">
-        Una propuesta diseñada para <strong>David Alexander Aponte Becerra</strong> a partir del diagnóstico del 22 de mayo de 2026. No es una agencia más, es una sociedad con piel en el juego para construir tu autoridad, tu metodología y tu ecosistema digital en Hotmart.
-      </p>
-      <div class="hero-ctas">
-        <a href="#cta" class="btn btn-primary">Agendar sesión de decisión <span class="btn-arrow">→</span></a>
-        <a href="#metodo" class="btn btn-ghost">Ver el método</a>
+<!-- =================== HERO con VANTA NET background =================== -->
+<header class="hero">
+  <div id="hero-vanta" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="reveal">
+        <div class="hero-eyebrow">Acompañamiento estratégico, 6 meses</div>
+        <h1 class="hero-title">Construyamos juntos el ecosistema que tu <span class="accent">visión a 24 meses</span> exige.</h1>
+        <p class="hero-sub">
+          Una propuesta diseñada para <strong>David Alexander Aponte Becerra</strong> a partir del diagnóstico del 22 de mayo de 2026. No es una agencia más, es una sociedad con piel en el juego para construir tu autoridad, tu metodología y tu ecosistema digital en Hotmart.
+        </p>
+        <div class="hero-ctas">
+          <a href="#cta" class="btn btn-primary">Agendar sesión de decisión <span class="btn-arrow">→</span></a>
+          <a href="#metodo" class="btn btn-ghost">Ver el método</a>
+        </div>
       </div>
-    </div>
 
-    <aside class="memo reveal" aria-label="Expediente">
-      <div class="memo-head">
-        <div class="memo-tag">Expediente</div>
-        <div class="memo-case">N&amp;J / DA, 26 / 05</div>
-      </div>
-      <div class="memo-row"><div class="memo-key">Cliente</div><div class="memo-val">David A. Aponte B.</div></div>
-      <div class="memo-row"><div class="memo-key">Sector</div><div class="memo-val">Educación financiera</div></div>
-      <div class="memo-row"><div class="memo-key">Arquetipo</div><div class="memo-val hi">Maestro Digital</div></div>
-      <div class="memo-row"><div class="memo-key">Madurez</div><div class="memo-val">75 / 100</div></div>
-      <div class="memo-row"><div class="memo-key">Meta 6 meses</div><div class="memo-val hi">$80M COP / mes</div></div>
-      <div class="memo-row"><div class="memo-key">Duración</div><div class="memo-val">6 meses, 7 hitos</div></div>
-      <div class="memo-row"><div class="memo-key">Equipo</div><div class="memo-val">Nathalia, Jorge, producción</div></div>
-      <div class="memo-row"><div class="memo-key">Validez</div><div class="memo-val">15 días desde entrega</div></div>
-    </aside>
+      <aside class="memo reveal" id="memoCard" aria-label="Expediente">
+        <div class="memo-head">
+          <div class="memo-tag">Expediente</div>
+          <div class="memo-case">N&amp;J / DA, 26 / 05</div>
+        </div>
+        <div class="memo-row"><div class="memo-key">Cliente</div><div class="memo-val">David A. Aponte B.</div></div>
+        <div class="memo-row"><div class="memo-key">Sector</div><div class="memo-val">Educación financiera</div></div>
+        <div class="memo-row"><div class="memo-key">Arquetipo</div><div class="memo-val hi">Maestro Digital</div></div>
+        <div class="memo-row"><div class="memo-key">Madurez</div><div class="memo-val">75 / 100</div></div>
+        <div class="memo-row"><div class="memo-key">Meta 6 meses</div><div class="memo-val hi">$80M COP / mes</div></div>
+        <div class="memo-row"><div class="memo-key">Duración</div><div class="memo-val">6 meses, 7 hitos</div></div>
+        <div class="memo-row"><div class="memo-key">Equipo</div><div class="memo-val">Nathalia, Jorge, producción</div></div>
+        <div class="memo-row"><div class="memo-key">Validez</div><div class="memo-val">15 días</div></div>
+      </aside>
+    </div>
   </div>
 </header>
 
@@ -1400,19 +1508,19 @@ footer strong { color: var(--ink-muted); font-weight: 500; }
 
     <div class="statbar reveal">
       <div class="stat">
-        <div class="stat-num">1</div>
+        <div class="stat-num" data-count="1">0</div>
         <div class="stat-label">Reunión exploratoria</div>
       </div>
       <div class="stat">
-        <div class="stat-num">33</div>
+        <div class="stat-num" data-count="33">0</div>
         <div class="stat-label">Preguntas respondidas</div>
       </div>
       <div class="stat">
-        <div class="stat-num">8</div>
+        <div class="stat-num" data-count="8">0</div>
         <div class="stat-label">Dimensiones analizadas</div>
       </div>
       <div class="stat">
-        <div class="stat-num">75<span class="frac">/100</span></div>
+        <div class="stat-num"><span data-count="75">0</span><span class="frac">/100</span></div>
         <div class="stat-label">Madurez promedio</div>
       </div>
     </div>
@@ -1460,23 +1568,11 @@ footer strong { color: var(--ink-muted); font-weight: 500; }
       </div>
 
       <aside class="arch-side reveal">
-        <div class="arch-side-label">Complementarios</div>
-        <div class="arch-row">
-          <div class="arch-row-name">Conferencista Mediático</div>
-          <div class="arch-row-pct">19 %</div>
-        </div>
-        <div class="arch-row">
-          <div class="arch-row-name">Líder de Comunidad</div>
-          <div class="arch-row-pct">13 %</div>
-        </div>
-        <div class="arch-row">
-          <div class="arch-row-name">Autor Experto</div>
-          <div class="arch-row-pct">11 %</div>
-        </div>
-        <div class="arch-row">
-          <div class="arch-row-name">Estratega Premium</div>
-          <div class="arch-row-pct">10 %</div>
-        </div>
+        <div class="arch-side-label">Complementarios y madurez</div>
+        <div class="arch-bar"><div class="arch-bar-name">Conferencista Mediático</div><div class="arch-bar-pct">19 %</div><div class="arch-bar-track"><span class="arch-bar-fill" data-fill="19"></span></div></div>
+        <div class="arch-bar"><div class="arch-bar-name">Líder de Comunidad</div><div class="arch-bar-pct">13 %</div><div class="arch-bar-track"><span class="arch-bar-fill" data-fill="13"></span></div></div>
+        <div class="arch-bar"><div class="arch-bar-name">Autor Experto</div><div class="arch-bar-pct">11 %</div><div class="arch-bar-track"><span class="arch-bar-fill" data-fill="11"></span></div></div>
+        <div class="arch-bar"><div class="arch-bar-name">Estratega Premium</div><div class="arch-bar-pct">10 %</div><div class="arch-bar-track"><span class="arch-bar-fill" data-fill="10"></span></div></div>
       </aside>
     </div>
 
@@ -1500,7 +1596,7 @@ footer strong { color: var(--ink-muted); font-weight: 500; }
         <div class="ancla-key">Tiempo</div>
         <h4 class="ancla-h">Break-even al mes 3.</h4>
         <p class="ancla-p">
-          Lo dijiste claro. Por eso el <strong>mes 4 (Lanzamiento Hotmart)</strong> ya tiene flujo recurrente entrando. La membresía fundadora se lanza con tu audiencia caliente, no esperamos al lanzamiento perfecto.
+          Lo dijiste claro. Por eso el <strong>mes 4 (Lanzamiento Hotmart)</strong> ya tiene flujo recurrente entrando. La membresía fundadora se lanza con tu audiencia caliente.
         </p>
       </div>
       <div class="ancla-cell">
@@ -1525,9 +1621,10 @@ footer strong { color: var(--ink-muted); font-weight: 500; }
       </p>
     </div>
 
-    <div class="timeline reveal">
+    <div class="timeline-wrap reveal">
       <div class="timeline-track-wrap">
         <div class="timeline-track"></div>
+        <div class="timeline-progress" id="tlProgress"></div>
         <div class="timeline-nodes">
           <button class="tnode is-zero" type="button" data-target="" aria-label="Momento Cero ya completado">
             <div class="tnode-dot"></div>
@@ -1552,62 +1649,4 @@ footer strong { color: var(--ink-muted); font-weight: 500; }
           <button class="tnode" type="button" data-target="p4">
             <div class="tnode-dot"></div>
             <div class="tnode-num">Mes 4</div>
-            <div class="tnode-name">Lanzamiento Hotmart</div>
-          </button>
-          <button class="tnode" type="button" data-target="p5">
-            <div class="tnode-dot"></div>
-            <div class="tnode-num">Mes 5</div>
-            <div class="tnode-name">Pitch y SPEAKER</div>
-          </button>
-          <button class="tnode" type="button" data-target="p6">
-            <div class="tnode-dot"></div>
-            <div class="tnode-num">Mes 6</div>
-            <div class="tnode-name">Guías Académicas</div>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="phase-section reveal">
-      <div class="tabs" role="tablist">
-        <button class="tab is-active" role="tab" data-target="p1"><span class="tab-num">M1</span>Sanar lo Roto</button>
-        <button class="tab" role="tab" data-target="p2"><span class="tab-num">M2</span>Kit de Marca Maestro</button>
-        <button class="tab" role="tab" data-target="p3"><span class="tab-num">M3</span>Ruta del Estudiante</button>
-        <button class="tab" role="tab" data-target="p4"><span class="tab-num">M4</span>Lanzamiento Hotmart</button>
-        <button class="tab" role="tab" data-target="p5"><span class="tab-num">M5</span>Pitch y SPEAKER</button>
-        <button class="tab" role="tab" data-target="p6"><span class="tab-num">M6</span>Guías Académicas</button>
-      </div>
-
-      <!-- FASE 1 -->
-      <div class="tabpanel is-active" id="p1" role="tabpanel">
-        <div class="phase">
-          <div class="phase-head">
-            <div class="phase-mega">01</div>
-            <div>
-              <h3 class="phase-name">Sanar lo Roto</h3>
-              <div class="phase-meta">
-                <span class="phase-meta-item">Mes 1</span>
-                <span class="phase-meta-item">1 hito</span>
-                <span class="phase-meta-item">Alta intensidad</span>
-              </div>
-            </div>
-          </div>
-
-          <p class="phase-intro">
-            Antes de construir nada nuevo, blindamos lo que ya existe. <span class="hi">Auditoría completa de activos digitales</span>, saneamiento de lo que está sangrando, y conversión del diagnóstico en activo de captación de prospectos.
-          </p>
-
-          <div class="phase-sub">
-            <div class="phase-sub-label">Auditoría digital completa</div>
-            <div class="checks">
-              <div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Revisión integral de activos visibles</strong>: web actual, perfiles sociales, curso Transformación Financiera, lead magnet, video GoAnimate en LinkedIn, AMV vencida, copy en inglés dentro del curso.</div></div>
-              <div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Inventario de servicios digitales</strong> que aparecen en línea, corrección de inconsistencias, disclaimers legales.</div></div>
-            </div>
-          </div>
-
-          <div class="phase-sub">
-            <div class="phase-sub-label">LinkedIn y redes (prioridad alta)</div>
-            <div class="checks">
-              <div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>LinkedIn refactor profundo</strong>: bio, headline, destacados, foto profesional nueva, prueba social ordenada, primeras piezas de manifiesto publicadas.</div></div>
-              <div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Redes (@)</strong>: Instagram y TikTok con handles unificados, bio coherente, eliminación del contenido que erosiona la promesa.</div></div>
-              <div class="check"><div class="check-mark">✓</div><div class="check-text">Reemplazo del <stro
+       
