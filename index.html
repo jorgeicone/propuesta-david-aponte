@@ -360,34 +360,6 @@
   </p>
 </header>
 
-<!-- 1. RESUMEN EJECUTIVO -->
-<section>
-  <div class="container">
-    <div class="sec-label">Resumen ejecutivo</div>
-    <h2 class="sec-title">Tres números que cuentan la <span class="grad">historia completa</span>.</h2>
-    <p class="sec-lead">
-      Si solo lees una cosa de esta propuesta, que sea esta sección.
-    </p>
-    <div class="grid-3">
-      <div class="card">
-        <div class="card-label">INVERSIÓN FIJA TOTAL</div>
-        <div class="big-num">$57M COP</div>
-        <div class="card-desc">$9.5M COP/mes × 6 meses. Cubre el equipo senior + producción durante la fase intensiva de creación.</div>
-      </div>
-      <div class="card">
-        <div class="card-label">META INCREMENTAL ANUAL</div>
-        <div class="big-num">$480M+</div>
-        <div class="card-desc">Cuando alcances $80M/mes (tu meta), el incremental sobre hoy te paga la inversión <strong>10x sobre</strong> en un año.</div>
-      </div>
-      <div class="card">
-        <div class="card-label">COPRODUCCIÓN HOTMART</div>
-        <div class="big-num">Perpetua</div>
-        <div class="card-desc">Quedamos socios en el ecosistema digital que construyamos juntos. Sin agencias. Sin proveedores. Socios.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- 2. LO QUE NOS DIJO TU DIAGNÓSTICO -->
 <section>
   <div class="container">
@@ -910,4 +882,23 @@
           </div>
           <div class="slider-row">
             <div class="slider-label">
-              <span class="n
+              <span class="name">Horizonte de cálculo (meses post-acompañamiento)</span>
+              <span class="val" id="vHoriz">18 meses</span>
+            </div>
+            <input type="range" id="rHoriz" min="6" max="36" value="18" step="3">
+          </div>
+
+          <div style="margin-top:24px;padding:14px;background:rgba(255,140,0,.06);border-left:3px solid var(--orange);border-radius:0 10px 10px 0;font-size:13px;color:var(--text-2)">
+            <strong style="color:var(--orange)">Importante:</strong> esto cubre solo ingresos Hotmart coproducidos.
+            <strong style="color:var(--text)">Conferencias, libro físico, app, 1:1, asesorías corporativas</strong> quedan 100% para David.
+          </div>
+        </div>
+
+        <div class="sim-result">
+          <h4>Reparto mensual (en estado estable)</h4>
+          <div class="sim-row"><span class="who">David Aponte</span><span class="amt" id="rDavid">$0</span></div>
+          <div class="sim-row"><span class="who">Nathalia</span><span class="amt" id="rNat">$0</span></div>
+          <div class="sim-row"><span class="who">Jorge</span><span class="amt" id="rJor">$0</span></div>
+
+          <h4 style="margin-top:24px">Acumulado en el horizonte</h4>
+          <div class="sim-row you"><span class="
