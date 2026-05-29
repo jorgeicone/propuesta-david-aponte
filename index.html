@@ -4,1649 +4,297 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Propuesta de Acompañamiento Estratégico - David Aponte</title>
-<meta name="description" content="Propuesta confidencial: acompañamiento estratégico de 6 meses para David Aponte, diseñada por Nathalia & Jorge.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ============================================================
-   TOKENS - OKLCH color system, type scale, motion curves
-   ============================================================ */
-:root {
-  --bg:           oklch(0.16 0.018 250);
-  --bg-2:         oklch(0.19 0.018 250);
-  --surface-1:    oklch(0.22 0.020 250);
-  --surface-2:    oklch(0.27 0.022 250);
-  --border-soft:  oklch(0.30 0.020 250 / 0.45);
-  --border:       oklch(0.38 0.028 250);
-  --border-strong: oklch(0.52 0.035 250);
-  --ink:          oklch(0.98 0.005 250);
-  --ink-muted:    oklch(0.78 0.014 250);
-  --ink-faint:    oklch(0.60 0.012 250);
-  --accent:       oklch(0.70 0.18 245);
-  --accent-hi:    oklch(0.80 0.16 245);
-  --accent-soft:  oklch(0.70 0.18 245 / 0.12);
-  --accent-edge:  oklch(0.70 0.18 245 / 0.34);
-  --accent-glow:  oklch(0.70 0.18 245 / 0.5);
-  --success:      oklch(0.78 0.16 155);
-  --success-soft: oklch(0.78 0.16 155 / 0.12);
-  --warn:         oklch(0.80 0.16 75);
-  --warn-soft:    oklch(0.80 0.16 75 / 0.12);
-
-  --font-display: 'Geist', system-ui, -apple-system, sans-serif;
-  --font-body:    'Geist', system-ui, -apple-system, sans-serif;
-  --font-mono:    'Geist Mono', ui-monospace, monospace;
-
-  --tx-display: clamp(2.5rem, 5.6vw, 5rem);
-  --tx-h1: clamp(2rem, 3.6vw, 3rem);
-  --tx-h2: clamp(1.5rem, 2.4vw, 2rem);
-  --tx-h3: 1.25rem;
-  --tx-body: 1rem;
-  --tx-sm: 0.875rem;
-  --tx-xs: 0.75rem;
-  --tx-micro: 0.6875rem;
-
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
-  --space-24: 6rem;
-
-  --r-sm: 6px;
-  --r-md: 10px;
-  --r-lg: 16px;
-  --r-xl: 24px;
-  --r-pill: 999px;
-
-  /* Emil's strong ease-out curves */
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-out-quart: cubic-bezier(0.23, 1, 0.32, 1);
-  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
-  --dur-fast: 120ms;
-  --dur-med: 240ms;
-  --dur-slow: 480ms;
-
-  --z-bg: -1;
-  --z-content: 1;
-  --z-sticky: 50;
-  --z-overlay: 100;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-*::selection { background: var(--accent); color: var(--bg); }
-
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-feature-settings: "ss01", "ss02", "cv01", "cv02";
-  font-size: var(--tx-body);
-  line-height: 1.55;
-  font-weight: 400;
-  overflow-x: hidden;
-  min-height: 100dvh;
-  -webkit-font-smoothing: antialiased;
-}
-
-img { display: block; max-width: 100%; height: auto; }
-button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
-a { color: inherit; text-decoration: none; }
-
-.container { max-width: 1280px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2.5rem); }
-
-/* ============================================================
-   TOP STRIP
-   ============================================================ */
-.topstrip {
-  position: sticky;
-  top: 0;
-  z-index: var(--z-sticky);
-  background: oklch(0.16 0.018 250 / 0.7);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border-bottom: 1px solid var(--border-soft);
-}
-.topstrip-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 14px clamp(1rem, 4vw, 2.5rem);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-}
-.sigil {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: var(--font-display);
-  font-size: var(--tx-sm);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-.sigil-mark {
-  width: 24px;
-  height: 24px;
-  border-radius: var(--r-sm);
-  background: linear-gradient(135deg, var(--accent), oklch(0.45 0.18 245));
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 14px var(--accent-glow);
-}
-.sigil-mark::after {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  border-radius: 5px;
-  background: linear-gradient(135deg, oklch(0.98 0.04 245 / 0.18), transparent 60%);
-}
-.status-pill {
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
-  padding: 7px 13px;
-  border: 1px solid var(--border-soft);
-  border-radius: var(--r-pill);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.status-pill::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: var(--r-pill);
-  background: var(--success);
-  box-shadow: 0 0 10px var(--success);
-  animation: livedot 2s ease-in-out infinite;
-}
-@keyframes livedot {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .status-pill::before { animation: none; }
-}
-
-/* ============================================================
-   HERO - Vanta NET background + asymmetric content
-   ============================================================ */
-.hero {
-  position: relative;
-  padding: clamp(4rem, 8vw, 7rem) 0 clamp(3rem, 6vw, 5rem);
-  overflow: hidden;
-  isolation: isolate;
-}
-
-#hero-vanta {
-  position: absolute;
-  inset: 0;
-  z-index: var(--z-bg);
-  pointer-events: none;
-}
-#hero-vanta::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 30% 50%, transparent 0%, var(--bg) 70%),
-    linear-gradient(180deg, transparent 60%, var(--bg) 100%);
-  pointer-events: none;
-}
-
-.hero-grid {
-  position: relative;
-  z-index: var(--z-content);
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.95fr);
-  gap: clamp(2rem, 5vw, 4.5rem);
-  align-items: end;
-}
-@media (max-width: 900px) {
-  .hero-grid { grid-template-columns: 1fr; align-items: start; }
-}
-
-.hero-eyebrow {
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
-  margin-bottom: var(--space-8);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.hero-eyebrow::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, var(--border-soft), transparent);
-  max-width: 180px;
-}
-
-h1.hero-title {
-  font-family: var(--font-display);
-  font-size: var(--tx-display);
-  font-weight: 600;
-  line-height: 1.02;
-  letter-spacing: -0.045em;
-  text-wrap: balance;
-  margin-bottom: var(--space-6);
-  max-width: 17ch;
-}
-h1.hero-title .accent {
-  color: var(--accent-hi);
-  font-style: italic;
-  font-weight: 500;
-  display: inline-block;
-  padding-bottom: 2px;
-  margin-bottom: -2px;
-}
-
-.hero-sub {
-  font-size: 1.075rem;
-  color: var(--ink-muted);
-  line-height: 1.55;
-  max-width: 52ch;
-  text-wrap: pretty;
-  margin-bottom: var(--space-8);
-}
-.hero-sub strong { color: var(--ink); font-weight: 500; }
-
-.hero-ctas {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  flex-wrap: wrap;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 22px;
-  border-radius: var(--r-pill);
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: var(--tx-sm);
-  letter-spacing: -0.005em;
-  transition: transform var(--dur-fast) var(--ease-out-quart),
-              background-color var(--dur-med) var(--ease-out-quart),
-              box-shadow var(--dur-med) var(--ease-out-quart);
-  will-change: transform;
-}
-.btn:active { transform: scale(0.97); }
-.btn-primary {
-  background: var(--accent);
-  color: oklch(0.14 0.020 245);
-  font-weight: 600;
-  box-shadow: 0 8px 24px var(--accent-glow);
-}
-.btn-primary:hover {
-  background: var(--accent-hi);
-  box-shadow: 0 12px 32px var(--accent-glow);
-  transform: translateY(-1px);
-}
-.btn-primary:active { transform: translateY(0) scale(0.97); }
-.btn-ghost {
-  color: var(--ink);
-  border: 1px solid var(--border);
-  background: oklch(0.16 0.018 250 / 0.4);
-  backdrop-filter: blur(10px);
-}
-.btn-ghost:hover {
-  background: var(--surface-1);
-  border-color: var(--border-strong);
-}
-.btn-arrow {
-  display: inline-block;
-  transition: transform var(--dur-fast) var(--ease-out-quart);
-}
-.btn:hover .btn-arrow { transform: translateX(3px); }
-
-@media (prefers-reduced-motion: reduce) {
-  .btn, .btn-arrow, .btn:hover { transition: none; transform: none; }
-}
-
-/* Expediente / memo panel - with Vanilla Tilt support */
-.memo {
-  background: oklch(0.20 0.022 250 / 0.65);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--r-lg);
-  padding: clamp(1.25rem, 2.5vw, 1.75rem);
-  font-family: var(--font-mono);
-  font-size: var(--tx-xs);
-  color: var(--ink-muted);
-  transform-style: preserve-3d;
-  box-shadow: 0 24px 60px oklch(0.04 0.020 250 / 0.5),
-              inset 0 1px 0 oklch(0.98 0.005 250 / 0.06);
-}
-.memo > * { transform: translateZ(20px); }
-.memo-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: var(--space-3);
-  border-bottom: 1px solid var(--border-soft);
-  margin-bottom: var(--space-4);
-}
-.memo-tag {
-  font-size: var(--tx-micro);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent-hi);
-  font-weight: 600;
-}
-.memo-case {
-  font-size: var(--tx-micro);
-  letter-spacing: 0.04em;
-  color: var(--ink-faint);
-}
-.memo-row {
-  display: grid;
-  grid-template-columns: 9rem 1fr;
-  gap: 10px;
-  padding: 8px 0;
-  border-bottom: 1px dashed oklch(0.30 0.020 250 / 0.35);
-}
-.memo-row:last-child { border-bottom: none; }
-.memo-key {
-  font-size: var(--tx-micro);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-}
-.memo-val { color: var(--ink); }
-.memo-val.hi { color: var(--accent-hi); font-weight: 500; }
-
-/* ============================================================
-   SECTION BASE
-   ============================================================ */
-section { padding: clamp(4rem, 7vw, 6rem) 0; position: relative; }
-.section-head { max-width: 60ch; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
-.section-label {
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent-hi);
-  margin-bottom: var(--space-4);
-}
-h2.section-title {
-  font-family: var(--font-display);
-  font-size: var(--tx-h1);
-  font-weight: 600;
-  line-height: 1.08;
-  letter-spacing: -0.035em;
-  text-wrap: balance;
-  margin-bottom: var(--space-4);
-}
-h2.section-title em {
-  color: var(--accent-hi);
-  font-style: italic;
-  font-weight: 500;
-}
-.section-lead {
-  font-size: 1.025rem;
-  color: var(--ink-muted);
-  text-wrap: pretty;
-  max-width: 62ch;
-  line-height: 1.6;
-}
-.section-lead strong { color: var(--ink); font-weight: 500; }
-
-/* ============================================================
-   MOMENTO CERO - statbar with count-up animation
-   ============================================================ */
-.statbar {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid var(--border-soft);
-  border-bottom: 1px solid var(--border-soft);
-  margin-bottom: var(--space-12);
-  position: relative;
-}
-.statbar::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 1px;
-  width: 100%;
-  background: linear-gradient(90deg, transparent, var(--accent-edge), transparent);
-  transform: scaleX(0);
-  transform-origin: left;
-  animation: scanLine 3s var(--ease-out-expo) forwards;
-}
-@keyframes scanLine {
-  to { transform: scaleX(1); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .statbar::before { display: none; }
-}
-@media (max-width: 720px) { .statbar { grid-template-columns: 1fr 1fr; } }
-.stat {
-  padding: var(--space-8) var(--space-6);
-  border-right: 1px solid var(--border-soft);
-  position: relative;
-}
-.stat:last-child { border-right: none; }
-@media (max-width: 720px) {
-  .stat:nth-child(2n) { border-right: none; }
-  .stat:nth-child(-n+2) { border-bottom: 1px solid var(--border-soft); }
-}
-.stat-num {
-  font-family: var(--font-mono);
-  font-size: clamp(2.25rem, 4vw, 3.25rem);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  color: var(--ink);
-  margin-bottom: var(--space-3);
-  font-feature-settings: "tnum";
-  font-variant-numeric: tabular-nums;
-}
-.stat-num .frac {
-  font-size: 0.5em;
-  color: var(--ink-faint);
-  margin-left: 2px;
-}
-.stat-label {
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-}
-
-.momento-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-8);
-}
-@media (max-width: 760px) { .momento-grid { grid-template-columns: 1fr; } }
-.momento-item {
-  padding-top: var(--space-6);
-  border-top: 1px solid var(--border-soft);
-}
-.momento-key {
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent-hi);
-  margin-bottom: var(--space-3);
-}
-.momento-h {
-  font-family: var(--font-display);
-  font-size: var(--tx-h3);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  margin-bottom: var(--space-3);
-  text-wrap: balance;
-}
-.momento-p {
-  font-size: var(--tx-sm);
-  color: var(--ink-muted);
-  line-height: 1.6;
-  text-wrap: pretty;
-}
-.momento-p strong { color: var(--ink); font-weight: 500; }
-
-/* ============================================================
-   PERFIL - asymmetric editorial
-   ============================================================ */
-.perfil-wrap {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: start;
-}
-@media (max-width: 900px) { .perfil-wrap { grid-template-columns: 1fr; } }
-
-.arch-main {
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-bottom: var(--space-4);
-}
-.arch-headline {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4.5vw, 3.5rem);
-  font-weight: 600;
-  letter-spacing: -0.04em;
-  line-height: 1.02;
-  margin-bottom: var(--space-3);
-  text-wrap: balance;
-}
-.arch-headline .pct {
-  font-family: var(--font-mono);
-  font-weight: 400;
-  color: var(--accent-hi);
-  font-size: 0.55em;
-  letter-spacing: -0.02em;
-  margin-left: 12px;
-  vertical-align: middle;
-  font-feature-settings: "tnum";
-}
-.arch-body {
-  font-size: 1.025rem;
-  color: var(--ink-muted);
-  line-height: 1.6;
-  max-width: 56ch;
-  text-wrap: pretty;
-}
-.arch-body strong { color: var(--ink); font-weight: 500; }
-.arch-body + .arch-body { margin-top: var(--space-4); }
-
-.arch-side {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  padding: var(--space-6);
-  background: var(--surface-1);
-  border-radius: var(--r-lg);
-  border: 1px solid var(--border-soft);
-}
-.arch-side-label {
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-bottom: var(--space-2);
-}
-
-/* Animated archetype bars (GSAP scrolltrigger) */
-.arch-bar {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: var(--space-2);
-  align-items: baseline;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border-soft);
-  position: relative;
-}
-.arch-bar:last-child { border-bottom: none; }
-.arch-bar-name {
-  font-size: var(--tx-sm);
-  color: var(--ink);
-  font-weight: 500;
-}
-.arch-bar-pct {
-  font-family: var(--font-mono);
-  font-size: var(--tx-sm);
-  color: var(--ink-muted);
-  font-feature-settings: "tnum";
-}
-.arch-bar-track {
-  grid-column: 1 / -1;
-  height: 3px;
-  border-radius: var(--r-pill);
-  background: oklch(0.30 0.020 250 / 0.5);
-  margin-top: 8px;
-  overflow: hidden;
-}
-.arch-bar-fill {
-  display: block;
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, var(--accent), var(--accent-hi));
-  border-radius: var(--r-pill);
-  box-shadow: 0 0 12px var(--accent-glow);
-}
-
-/* Editorial pull-quote */
-.pullquote {
-  margin-top: clamp(2.5rem, 5vw, 4rem);
-  padding: clamp(2rem, 4vw, 3rem) 0;
-  border-top: 1px solid var(--border-soft);
-  border-bottom: 1px solid var(--border-soft);
-  position: relative;
-}
-.pullquote::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: 0;
-  height: 1px;
-  width: 80px;
-  background: var(--accent);
-  box-shadow: 0 0 12px var(--accent-glow);
-}
-.pullquote-tag {
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent-hi);
-  margin-bottom: var(--space-4);
-}
-.pullquote-text {
-  font-family: var(--font-display);
-  font-size: clamp(1.375rem, 2.6vw, 1.875rem);
-  font-weight: 400;
-  line-height: 1.32;
-  letter-spacing: -0.025em;
-  color: var(--ink);
-  font-style: italic;
-  text-wrap: pretty;
-  max-width: 32ch;
-  margin-bottom: var(--space-4);
-}
-.pullquote-attr {
-  font-family: var(--font-mono);
-  font-size: var(--tx-xs);
-  color: var(--ink-faint);
-  letter-spacing: 0.04em;
-}
-
-/* ============================================================
-   ANCLAS
-   ============================================================ */
-.anclas {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border-soft);
-  border-radius: var(--r-lg);
-  overflow: hidden;
-  border: 1px solid var(--border-soft);
-  margin-top: clamp(2.5rem, 5vw, 4rem);
-}
-@media (max-width: 760px) { .anclas { grid-template-columns: 1fr; } }
-.ancla-cell {
-  background: var(--bg);
-  padding: clamp(1.5rem, 3vw, 2rem);
-  transition: background-color var(--dur-med) var(--ease-out-quart);
-}
-.ancla-cell:hover { background: var(--surface-1); }
-.ancla-key {
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent-hi);
-  margin-bottom: var(--space-3);
-}
-.ancla-h {
-  font-family: var(--font-display);
-  font-size: 1.125rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  margin-bottom: var(--space-3);
-  text-wrap: balance;
-}
-.ancla-p {
-  font-size: var(--tx-sm);
-  color: var(--ink-muted);
-  line-height: 1.55;
-  text-wrap: pretty;
-}
-.ancla-p strong { color: var(--ink); font-weight: 500; }
-
-/* ============================================================
-   TIMELINE
-   ============================================================ */
-.timeline-wrap { position: relative; padding: clamp(2rem, 4vw, 3rem) 0 0; }
-.timeline-track-wrap { position: relative; padding-top: 28px; }
-.timeline-track {
-  position: absolute;
-  top: 28px;
-  left: 7%;
-  right: 7%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border) 8%, var(--border) 92%, transparent);
-}
-.timeline-progress {
-  position: absolute;
-  top: 28px;
-  left: 7%;
-  height: 1px;
-  width: 0%;
-  background: linear-gradient(90deg, var(--accent), var(--accent-hi));
-  box-shadow: 0 0 8px var(--accent-glow);
-}
-.timeline-nodes {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: var(--space-2);
-  position: relative;
-}
-@media (max-width: 900px) { .timeline-nodes { grid-template-columns: repeat(4, 1fr); gap: var(--space-4); } .timeline-track, .timeline-progress { display: none; } }
-@media (max-width: 560px) { .timeline-nodes { grid-template-columns: repeat(2, 1fr); } }
-
-.tnode {
-  text-align: center;
-  cursor: pointer;
-  transition: transform var(--dur-med) var(--ease-out-quart);
-}
-.tnode:hover { transform: translateY(-4px); }
-.tnode:active { transform: translateY(-1px) scale(0.98); }
-@media (prefers-reduced-motion: reduce) {
-  .tnode, .tnode:hover, .tnode:active { transition: none; transform: none; }
-}
-.tnode-dot {
-  width: 14px;
-  height: 14px;
-  border-radius: var(--r-pill);
-  background: var(--bg);
-  border: 2px solid var(--border-strong);
-  margin: 0 auto 14px;
-  position: relative;
-  transition: border-color var(--dur-med) var(--ease-out-quart),
-              box-shadow var(--dur-med) var(--ease-out-quart),
-              background-color var(--dur-med) var(--ease-out-quart);
-}
-.tnode:hover .tnode-dot {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 5px var(--accent-soft), 0 0 18px var(--accent-glow);
-  background: var(--accent);
-}
-.tnode.is-zero .tnode-dot {
-  background: var(--accent);
-  border-color: var(--accent);
-  box-shadow: 0 0 0 4px var(--accent-soft), 0 0 16px var(--accent-glow);
-}
-.tnode-num {
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  letter-spacing: 0.14em;
-  color: var(--ink-faint);
-  margin-bottom: 4px;
-  text-transform: uppercase;
-}
-.tnode-name {
-  font-family: var(--font-display);
-  font-size: var(--tx-sm);
-  font-weight: 500;
-  letter-spacing: -0.015em;
-  line-height: 1.2;
-  color: var(--ink);
-  text-wrap: balance;
-  padding: 0 2px;
-}
-
-/* ============================================================
-   TABS + PHASE
-   ============================================================ */
-.phase-section { margin-top: clamp(3rem, 5vw, 4rem); }
-.tabs {
-  display: flex;
-  gap: 2px;
-  padding: 4px;
-  background: var(--surface-1);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--r-pill);
-  margin-bottom: var(--space-8);
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.tabs::-webkit-scrollbar { display: none; }
-.tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border-radius: var(--r-pill);
-  font-size: var(--tx-sm);
-  font-weight: 500;
-  color: var(--ink-muted);
-  white-space: nowrap;
-  transition: color var(--dur-fast) var(--ease-out-quart),
-              background-color var(--dur-med) var(--ease-out-quart);
-  flex: 1;
-  justify-content: center;
-  min-width: max-content;
-}
-.tab:hover { color: var(--ink); }
-.tab:active { transform: scale(0.97); }
-.tab.is-active {
-  background: var(--bg);
-  color: var(--ink);
-  box-shadow: 0 1px 0 oklch(0.95 0.005 250 / 0.04) inset,
-              0 8px 24px oklch(0.06 0.020 250 / 0.6);
-}
-.tab .tab-num {
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  letter-spacing: 0.08em;
-  color: var(--ink-faint);
-  font-weight: 500;
-}
-.tab.is-active .tab-num { color: var(--accent-hi); }
-@media (prefers-reduced-motion: reduce) { .tab { transition: none; } }
-
-.tabpanel { display: none; }
-.tabpanel.is-active {
-  display: block;
-  animation: panelIn var(--dur-slow) var(--ease-out-expo);
-}
-@keyframes panelIn {
-  from { opacity: 0; transform: translateY(12px); filter: blur(4px); }
-  to { opacity: 1; transform: translateY(0); filter: blur(0); }
-}
-@media (prefers-reduced-motion: reduce) { .tabpanel.is-active { animation: none; } }
-
-.phase {
-  background: var(--surface-1);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--r-lg);
-  padding: clamp(1.75rem, 3.5vw, 2.5rem);
-}
-.phase-head {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--space-6);
-  align-items: center;
-  padding-bottom: var(--space-6);
-  border-bottom: 1px solid var(--border-soft);
-  margin-bottom: var(--space-6);
-}
-.phase-mega {
-  font-family: var(--font-mono);
-  font-size: clamp(3.5rem, 6vw, 4.5rem);
-  font-weight: 400;
-  line-height: 0.85;
-  letter-spacing: -0.04em;
-  color: var(--accent-hi);
-  font-feature-settings: "tnum";
-}
-.phase-name {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.4vw, 1.875rem);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  margin-bottom: var(--space-3);
-  text-wrap: balance;
-}
-.phase-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-4);
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-}
-.phase-meta-item { display: inline-flex; align-items: center; gap: 6px; }
-.phase-meta-item::before {
-  content: "";
-  width: 4px;
-  height: 4px;
-  border-radius: var(--r-pill);
-  background: var(--ink-faint);
-}
-.phase-intro {
-  font-size: 1.025rem;
-  color: var(--ink-muted);
-  line-height: 1.6;
-  text-wrap: pretty;
-  margin-bottom: var(--space-6);
-  max-width: 62ch;
-}
-.phase-intro .hi { color: var(--accent-hi); font-weight: 500; }
-
-.phase-sub { margin-bottom: var(--space-6); }
-.phase-sub:last-child { margin-bottom: 0; }
-.phase-sub-label {
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent-hi);
-  margin-bottom: var(--space-4);
-}
-
-.checks { display: grid; gap: 10px; }
-.check {
-  display: grid;
-  grid-template-columns: 24px 1fr;
-  gap: 14px;
-  padding: 12px 14px;
-  background: var(--bg-2);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--r-md);
-  transition: border-color var(--dur-med) var(--ease-out-quart),
-              background-color var(--dur-med) var(--ease-out-quart);
-}
-.check:hover { border-color: var(--border); background: var(--surface-1); }
-.check-mark {
-  width: 24px;
-  height: 24px;
-  border-radius: var(--r-sm);
-  background: var(--accent-soft);
-  color: var(--accent-hi);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.check-text {
-  font-size: var(--tx-sm);
-  color: var(--ink-muted);
-  line-height: 1.55;
-}
-.check-text strong { color: var(--ink); font-weight: 500; }
-
-.hito {
-  margin-top: var(--space-8);
-  padding: var(--space-6);
-  background: var(--success-soft);
-  border: 1px solid oklch(0.78 0.16 155 / 0.28);
-  border-radius: var(--r-md);
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-2);
-  position: relative;
-  overflow: hidden;
-}
-.hito::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: linear-gradient(180deg, var(--success), transparent);
-}
-.hito-label {
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--success);
-  font-weight: 600;
-}
-.hito-text {
-  font-size: var(--tx-sm);
-  color: var(--ink);
-  line-height: 1.55;
-  font-weight: 500;
-  text-wrap: pretty;
-}
-
-/* ============================================================
-   ECONOMÍA
-   ============================================================ */
-.econ {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-6);
-}
-@media (max-width: 880px) { .econ { grid-template-columns: 1fr; } }
-.econ-card {
-  background: var(--surface-1);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--r-lg);
-  padding: clamp(1.75rem, 3vw, 2.25rem);
-}
-.econ-card.alt {
-  background: linear-gradient(180deg, var(--surface-1), oklch(0.22 0.025 250));
-}
-.econ-tag {
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-bottom: var(--space-4);
-}
-.econ-num {
-  font-family: var(--font-mono);
-  font-size: clamp(2.75rem, 4.5vw, 3.5rem);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.045em;
-  color: var(--ink);
-  margin-bottom: var(--space-3);
-  font-feature-settings: "tnum";
-}
-.econ-num .unit {
-  font-size: 0.45em;
-  color: var(--ink-faint);
-  font-weight: 400;
-  margin-left: 6px;
-}
-.econ-sub {
-  font-size: var(--tx-sm);
-  color: var(--ink-muted);
-  margin-bottom: var(--space-6);
-  line-height: 1.55;
-}
-.econ-sub strong { color: var(--ink); font-weight: 500; }
-
-.spec-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: var(--tx-sm);
-}
-.spec-table th {
-  text-align: left;
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border-soft);
-}
-.spec-table td {
-  padding: 14px 0;
-  color: var(--ink-muted);
-  border-bottom: 1px solid oklch(0.30 0.020 250 / 0.25);
-}
-.spec-table tr:last-child td { border-bottom: none; }
-.spec-table td.num {
-  text-align: right;
-  font-family: var(--font-mono);
-  color: var(--ink);
-  font-feature-settings: "tnum";
-}
-.spec-table tr.total td {
-  padding-top: 18px;
-  font-weight: 600;
-  color: var(--ink);
-  border-top: 1px solid var(--border);
-}
-.spec-table tr.total td.num { color: var(--accent-hi); font-size: 1rem; }
-
-.member-note {
-  margin-top: var(--space-5);
-  padding: var(--space-4);
-  background: var(--bg-2);
-  border-radius: var(--r-md);
-  border: 1px solid var(--border-soft);
-  font-size: var(--tx-sm);
-  color: var(--ink-muted);
-  line-height: 1.55;
-}
-.member-note strong { color: var(--accent-hi); font-weight: 500; }
-
-.productos-wrap { margin-top: clamp(2.5rem, 4vw, 3rem); }
-.productos-head {
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-bottom: var(--space-6);
-}
-.productos {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-3);
-}
-@media (max-width: 720px) { .productos { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 440px) { .productos { grid-template-columns: 1fr; } }
-.prod {
-  padding: var(--space-5);
-  background: var(--surface-1);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--r-md);
-  transition: border-color var(--dur-med) var(--ease-out-quart),
-              transform var(--dur-med) var(--ease-out-quart);
-}
-.prod:hover { border-color: var(--border); transform: translateY(-2px); }
-.prod.featured {
-  background: linear-gradient(180deg, var(--accent-soft), var(--surface-1));
-  border-color: var(--accent-edge);
-}
-.prod-tag {
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-bottom: var(--space-3);
-}
-.prod.featured .prod-tag { color: var(--accent-hi); }
-.prod-name {
-  font-family: var(--font-display);
-  font-size: var(--tx-sm);
-  font-weight: 500;
-  letter-spacing: -0.015em;
-  color: var(--ink);
-  line-height: 1.3;
-  text-wrap: balance;
-}
-
-/* ============================================================
-   SIMULADOR
-   ============================================================ */
-.sim {
-  background: var(--surface-1);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--r-lg);
-  padding: clamp(2rem, 4vw, 2.5rem);
-  margin-top: clamp(2rem, 4vw, 3rem);
-  position: relative;
-  overflow: hidden;
-}
-.sim::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle at top right, var(--accent-soft), transparent 70%);
-  pointer-events: none;
-}
-.sim-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-6);
-  margin-bottom: var(--space-8);
-  flex-wrap: wrap;
-  position: relative;
-}
-.sim-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.375rem, 2.4vw, 1.625rem);
-  font-weight: 500;
-  letter-spacing: -0.025em;
-  line-height: 1.2;
-  margin-bottom: var(--space-2);
-  text-wrap: balance;
-}
-.sim-sub { font-size: var(--tx-sm); color: var(--ink-muted); max-width: 48ch; }
-.sim-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: clamp(2rem, 4vw, 3rem);
-  align-items: start;
-  position: relative;
-}
-@media (max-width: 880px) { .sim-grid { grid-template-columns: 1fr; } }
-
-.slider-row { margin-bottom: var(--space-6); }
-.slider-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: var(--space-3);
-}
-.slider-name {
-  font-size: var(--tx-sm);
-  color: var(--ink-muted);
-  max-width: 36ch;
-}
-.slider-val {
-  font-family: var(--font-mono);
-  font-size: 1.5rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  color: var(--accent-hi);
-  font-feature-settings: "tnum";
-  font-variant-numeric: tabular-nums;
-}
-
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 6px;
-  border-radius: var(--r-pill);
-  background: var(--border-soft);
-  outline: none;
-  cursor: pointer;
-}
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 22px;
-  height: 22px;
-  border-radius: var(--r-pill);
-  background: var(--accent);
-  border: 2px solid var(--bg);
-  cursor: pointer;
-  transition: transform var(--dur-fast) var(--ease-out-quart),
-              box-shadow var(--dur-med) var(--ease-out-quart);
-  box-shadow: 0 0 0 0 var(--accent-soft), 0 4px 14px var(--accent-glow);
-}
-input[type="range"]::-webkit-slider-thumb:hover {
-  box-shadow: 0 0 0 8px var(--accent-soft), 0 8px 18px var(--accent-glow);
-}
-input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.12); }
-input[type="range"]::-moz-range-thumb {
-  width: 22px;
-  height: 22px;
-  border-radius: var(--r-pill);
-  background: var(--accent);
-  border: 2px solid var(--bg);
-  cursor: pointer;
-}
-
-.sim-out {
-  background: var(--bg);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--r-md);
-  padding: var(--space-6);
-}
-.sim-out-h {
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-bottom: var(--space-4);
-  font-weight: 500;
-}
-.sim-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid oklch(0.30 0.020 250 / 0.3);
-}
-.sim-row:last-of-type { border-bottom: none; }
-.sim-who { font-size: var(--tx-sm); color: var(--ink-muted); }
-.sim-amt {
-  font-family: var(--font-mono);
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--ink);
-  font-feature-settings: "tnum";
-}
-.sim-row.hi {
-  background: var(--accent-soft);
-  margin: var(--space-2) calc(-1 * var(--space-4));
-  padding: 12px var(--space-4);
-  border-radius: var(--r-md);
-  border-bottom: none;
-}
-.sim-row.hi .sim-who { color: var(--accent-hi); font-weight: 500; }
-.sim-row.hi .sim-amt { color: var(--accent-hi); }
-.sim-row.roi {
-  background: var(--success-soft);
-  margin-top: var(--space-3);
-  padding: 16px var(--space-4);
-  border-radius: var(--r-md);
-  border-bottom: none;
-  border: 1px solid oklch(0.78 0.16 155 / 0.28);
-}
-.sim-row.roi .sim-who {
-  color: var(--success);
-  font-weight: 600;
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-.sim-row.roi .sim-amt { color: var(--success); font-size: 1.625rem; }
-
-.sim-note {
-  margin-top: var(--space-6);
-  padding: var(--space-4);
-  background: var(--warn-soft);
-  border-radius: var(--r-md);
-  font-size: var(--tx-sm);
-  color: var(--ink-muted);
-  line-height: 1.55;
-}
-.sim-note strong { color: var(--warn); font-weight: 500; }
-.sim-note .em { color: var(--ink); font-weight: 500; }
-
-/* ============================================================
-   CLÁUSULAS
-   ============================================================ */
-.clausulas {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-6);
-}
-@media (max-width: 760px) { .clausulas { grid-template-columns: 1fr; } }
-.clausula {
-  padding: clamp(1.75rem, 3vw, 2.25rem);
-  background: var(--surface-1);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--r-lg);
-}
-.clausula-head {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  margin-bottom: var(--space-6);
-  padding-bottom: var(--space-4);
-  border-bottom: 1px solid var(--border-soft);
-}
-.clausula-tag {
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent-hi);
-  padding: 5px 11px;
-  background: var(--accent-soft);
-  border-radius: var(--r-pill);
-  font-weight: 500;
-}
-.clausula-list { display: grid; gap: var(--space-3); }
-
-/* ============================================================
-   CTA FINAL
-   ============================================================ */
-.cta-final {
-  padding: clamp(4rem, 8vw, 6rem) clamp(2rem, 5vw, 4rem);
-  background: var(--surface-1);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--r-lg);
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.cta-final::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -10%;
-  right: -10%;
-  height: 100%;
-  background: radial-gradient(ellipse at center, var(--accent-soft), transparent 60%);
-  pointer-events: none;
-}
-.cta-final > * { position: relative; }
-.cta-eyebrow {
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent-hi);
-  margin-bottom: var(--space-4);
-}
-.cta-h {
-  font-family: var(--font-display);
-  font-size: clamp(1.875rem, 3.6vw, 2.75rem);
-  font-weight: 600;
-  letter-spacing: -0.035em;
-  line-height: 1.1;
-  margin-bottom: var(--space-4);
-  text-wrap: balance;
-  max-width: 22ch;
-  margin-left: auto;
-  margin-right: auto;
-}
-.cta-h em {
-  color: var(--accent-hi);
-  font-style: italic;
-  font-weight: 500;
-}
-.cta-p {
-  font-size: 1.025rem;
-  color: var(--ink-muted);
-  max-width: 52ch;
-  margin: 0 auto var(--space-8);
-  line-height: 1.55;
-  text-wrap: pretty;
-}
-.cta-validity {
-  margin-top: var(--space-6);
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  letter-spacing: 0.12em;
-  color: var(--ink-faint);
-  text-transform: uppercase;
-}
-.cta-validity strong { color: var(--ink-muted); font-weight: 500; }
-
-footer {
-  padding: clamp(3rem, 5vw, 4rem) 0;
-  border-top: 1px solid var(--border-soft);
-  margin-top: clamp(4rem, 8vw, 6rem);
-  text-align: center;
-  font-family: var(--font-mono);
-  font-size: var(--tx-micro);
-  letter-spacing: 0.12em;
-  color: var(--ink-faint);
-  text-transform: uppercase;
-  line-height: 1.8;
-}
-footer strong { color: var(--ink-muted); font-weight: 500; }
-
-/* ============================================================
-   REVEAL ENTRY (default visible, JS-enhanced)
-   Per Impeccable: reveal MUST enhance visible default, never gate
-   ============================================================ */
-.reveal { opacity: 1; transform: translateY(0); }
-.js-on .reveal {
-  opacity: 0;
-  transform: translateY(20px);
-}
-.js-on .reveal.in {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.8s var(--ease-out-expo),
-              transform 0.8s var(--ease-out-expo);
-}
-@media (prefers-reduced-motion: reduce) {
-  .js-on .reveal { opacity: 1; transform: none; }
-  .js-on .reveal.in { transition: none; }
-}
+:root{--bg:oklch(0.16 0.018 250);--bg-2:oklch(0.19 0.018 250);--surface-1:oklch(0.22 0.020 250);--border-soft:oklch(0.30 0.020 250 / 0.45);--border:oklch(0.38 0.028 250);--border-strong:oklch(0.52 0.035 250);--ink:oklch(0.98 0.005 250);--ink-muted:oklch(0.78 0.014 250);--ink-faint:oklch(0.60 0.012 250);--accent:oklch(0.70 0.18 245);--accent-hi:oklch(0.80 0.16 245);--accent-soft:oklch(0.70 0.18 245 / 0.12);--accent-edge:oklch(0.70 0.18 245 / 0.34);--accent-glow:oklch(0.70 0.18 245 / 0.5);--success:oklch(0.78 0.16 155);--success-soft:oklch(0.78 0.16 155 / 0.12);--warn:oklch(0.80 0.16 75);--warn-soft:oklch(0.80 0.16 75 / 0.12);--font-display:'Geist',system-ui,sans-serif;--font-body:'Geist',system-ui,sans-serif;--font-mono:'Geist Mono',ui-monospace,monospace;--tx-display:clamp(2.5rem,5.6vw,5rem);--tx-h1:clamp(2rem,3.6vw,3rem);--tx-h3:1.25rem;--tx-body:1rem;--tx-sm:0.875rem;--tx-xs:0.75rem;--tx-micro:0.6875rem;--space-2:0.5rem;--space-3:0.75rem;--space-4:1rem;--space-6:1.5rem;--space-8:2rem;--space-12:3rem;--r-sm:6px;--r-md:10px;--r-lg:16px;--r-pill:999px;--ease-out-expo:cubic-bezier(0.16,1,0.3,1);--ease-out-quart:cubic-bezier(0.23,1,0.32,1);--dur-fast:120ms;--dur-med:240ms;--dur-slow:480ms}
+*{box-sizing:border-box;margin:0;padding:0}*::selection{background:var(--accent);color:var(--bg)}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-feature-settings:"ss01","ss02","cv01","cv02";font-size:var(--tx-body);line-height:1.55;overflow-x:hidden;min-height:100dvh;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}a{color:inherit;text-decoration:none}
+.container{max-width:1280px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+.topstrip{position:sticky;top:0;z-index:50;background:oklch(0.16 0.018 250 / 0.7);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);border-bottom:1px solid var(--border-soft)}
+.topstrip-inner{max-width:1280px;margin:0 auto;padding:14px clamp(1rem,4vw,2.5rem);display:flex;align-items:center;justify-content:space-between;gap:var(--space-4)}
+.sigil{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-size:var(--tx-sm);font-weight:600;letter-spacing:-0.01em}
+.sigil-mark{width:24px;height:24px;border-radius:var(--r-sm);background:linear-gradient(135deg,var(--accent),oklch(0.45 0.18 245));position:relative;overflow:hidden;box-shadow:0 4px 14px var(--accent-glow)}
+.sigil-mark::after{content:"";position:absolute;inset:1px;border-radius:5px;background:linear-gradient(135deg,oklch(0.98 0.04 245 / 0.18),transparent 60%)}
+.status-pill{font-family:var(--font-mono);font-size:var(--tx-micro);font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-muted);padding:7px 13px;border:1px solid var(--border-soft);border-radius:var(--r-pill);display:inline-flex;align-items:center;gap:8px}
+.status-pill::before{content:"";width:6px;height:6px;border-radius:var(--r-pill);background:var(--success);box-shadow:0 0 10px var(--success);animation:livedot 2s ease-in-out infinite}
+@keyframes livedot{0%,100%{opacity:1}50%{opacity:0.35}}
+@media (prefers-reduced-motion:reduce){.status-pill::before{animation:none}}
+.hero{position:relative;padding:clamp(4rem,8vw,7rem) 0 clamp(3rem,6vw,5rem);overflow:hidden;isolation:isolate}
+#hero-vanta{position:absolute;inset:0;z-index:-1;pointer-events:none}
+#hero-vanta::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,transparent 0%,var(--bg) 70%),linear-gradient(180deg,transparent 60%,var(--bg) 100%);pointer-events:none}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,0.95fr);gap:clamp(2rem,5vw,4.5rem);align-items:end}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;align-items:start}}
+.hero-eyebrow{font-family:var(--font-mono);font-size:var(--tx-micro);font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:var(--space-8);display:flex;align-items:center;gap:14px}
+.hero-eyebrow::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--border-soft),transparent);max-width:180px}
+h1.hero-title{font-family:var(--font-display);font-size:var(--tx-display);font-weight:600;line-height:1.02;letter-spacing:-0.045em;text-wrap:balance;margin-bottom:var(--space-6);max-width:17ch}
+h1.hero-title .accent{color:var(--accent-hi);font-style:italic;font-weight:500;display:inline-block;padding-bottom:2px;margin-bottom:-2px}
+.hero-sub{font-size:1.075rem;color:var(--ink-muted);line-height:1.55;max-width:52ch;text-wrap:pretty;margin-bottom:var(--space-8)}
+.hero-sub strong{color:var(--ink);font-weight:500}
+.hero-ctas{display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:var(--r-pill);font-family:var(--font-body);font-weight:500;font-size:var(--tx-sm);letter-spacing:-0.005em;transition:transform var(--dur-fast) var(--ease-out-quart),background-color var(--dur-med) var(--ease-out-quart),box-shadow var(--dur-med) var(--ease-out-quart);will-change:transform}
+.btn:active{transform:scale(0.97)}
+.btn-primary{background:var(--accent);color:oklch(0.14 0.020 245);font-weight:600;box-shadow:0 8px 24px var(--accent-glow)}
+.btn-primary:hover{background:var(--accent-hi);box-shadow:0 12px 32px var(--accent-glow);transform:translateY(-1px)}
+.btn-primary:active{transform:translateY(0) scale(0.97)}
+.btn-ghost{color:var(--ink);border:1px solid var(--border);background:oklch(0.16 0.018 250 / 0.4);backdrop-filter:blur(10px)}
+.btn-ghost:hover{background:var(--surface-1);border-color:var(--border-strong)}
+.btn-arrow{display:inline-block;transition:transform var(--dur-fast) var(--ease-out-quart)}
+.btn:hover .btn-arrow{transform:translateX(3px)}
+@media (prefers-reduced-motion:reduce){.btn,.btn-arrow,.btn:hover{transition:none;transform:none}}
+.memo{background:oklch(0.20 0.022 250 / 0.65);backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:clamp(1.25rem,2.5vw,1.75rem);font-family:var(--font-mono);font-size:var(--tx-xs);color:var(--ink-muted);transform-style:preserve-3d;box-shadow:0 24px 60px oklch(0.04 0.020 250 / 0.5),inset 0 1px 0 oklch(0.98 0.005 250 / 0.06)}
+.memo>*{transform:translateZ(20px)}
+.memo-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:var(--space-3);border-bottom:1px solid var(--border-soft);margin-bottom:var(--space-4)}
+.memo-tag{font-size:var(--tx-micro);letter-spacing:0.16em;text-transform:uppercase;color:var(--accent-hi);font-weight:600}
+.memo-case{font-size:var(--tx-micro);letter-spacing:0.04em;color:var(--ink-faint)}
+.memo-row{display:grid;grid-template-columns:9rem 1fr;gap:10px;padding:8px 0;border-bottom:1px dashed oklch(0.30 0.020 250 / 0.35)}
+.memo-row:last-child{border-bottom:none}
+.memo-key{font-size:var(--tx-micro);letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-faint)}
+.memo-val{color:var(--ink)}.memo-val.hi{color:var(--accent-hi);font-weight:500}
+section{padding:clamp(4rem,7vw,6rem) 0;position:relative}
+.section-head{max-width:60ch;margin-bottom:clamp(2rem,4vw,3.5rem)}
+.section-label{font-family:var(--font-mono);font-size:var(--tx-micro);font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent-hi);margin-bottom:var(--space-4)}
+h2.section-title{font-family:var(--font-display);font-size:var(--tx-h1);font-weight:600;line-height:1.08;letter-spacing:-0.035em;text-wrap:balance;margin-bottom:var(--space-4)}
+h2.section-title em{color:var(--accent-hi);font-style:italic;font-weight:500}
+.section-lead{font-size:1.025rem;color:var(--ink-muted);text-wrap:pretty;max-width:62ch;line-height:1.6}
+.section-lead strong{color:var(--ink);font-weight:500}
+.statbar{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);margin-bottom:var(--space-12);position:relative}
+@media (max-width:720px){.statbar{grid-template-columns:1fr 1fr}}
+.stat{padding:var(--space-8) var(--space-6);border-right:1px solid var(--border-soft);position:relative}
+.stat:last-child{border-right:none}
+@media (max-width:720px){.stat:nth-child(2n){border-right:none}.stat:nth-child(-n+2){border-bottom:1px solid var(--border-soft)}}
+.stat-num{font-family:var(--font-mono);font-size:clamp(2.25rem,4vw,3.25rem);font-weight:500;line-height:1;letter-spacing:-0.04em;color:var(--ink);margin-bottom:var(--space-3);font-feature-settings:"tnum";font-variant-numeric:tabular-nums}
+.stat-num .frac{font-size:0.5em;color:var(--ink-faint);margin-left:2px}
+.stat-label{font-family:var(--font-mono);font-size:var(--tx-micro);font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-faint)}
+.momento-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-8)}
+@media (max-width:760px){.momento-grid{grid-template-columns:1fr}}
+.momento-item{padding-top:var(--space-6);border-top:1px solid var(--border-soft)}
+.momento-key{font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.16em;text-transform:uppercase;color:var(--accent-hi);margin-bottom:var(--space-3)}
+.momento-h{font-family:var(--font-display);font-size:var(--tx-h3);font-weight:500;letter-spacing:-0.02em;margin-bottom:var(--space-3);text-wrap:balance}
+.momento-p{font-size:var(--tx-sm);color:var(--ink-muted);line-height:1.6;text-wrap:pretty}
+.momento-p strong{color:var(--ink);font-weight:500}
+.perfil-wrap{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(2rem,5vw,4rem);align-items:start}
+@media (max-width:900px){.perfil-wrap{grid-template-columns:1fr}}
+.arch-main{font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:var(--space-4)}
+.arch-headline{font-family:var(--font-display);font-size:clamp(2rem,4.5vw,3.5rem);font-weight:600;letter-spacing:-0.04em;line-height:1.02;margin-bottom:var(--space-3);text-wrap:balance}
+.arch-headline .pct{font-family:var(--font-mono);font-weight:400;color:var(--accent-hi);font-size:0.55em;letter-spacing:-0.02em;margin-left:12px;vertical-align:middle;font-feature-settings:"tnum"}
+.arch-body{font-size:1.025rem;color:var(--ink-muted);line-height:1.6;max-width:56ch;text-wrap:pretty}
+.arch-body strong{color:var(--ink);font-weight:500}.arch-body+.arch-body{margin-top:var(--space-4)}
+.arch-side{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-6);background:var(--surface-1);border-radius:var(--r-lg);border:1px solid var(--border-soft)}
+.arch-side-label{font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:var(--space-2)}
+.arch-bar{display:grid;grid-template-columns:1fr auto;gap:var(--space-2);align-items:baseline;padding:12px 0;border-bottom:1px solid var(--border-soft);position:relative}
+.arch-bar:last-child{border-bottom:none}
+.arch-bar-name{font-size:var(--tx-sm);color:var(--ink);font-weight:500}
+.arch-bar-pct{font-family:var(--font-mono);font-size:var(--tx-sm);color:var(--ink-muted);font-feature-settings:"tnum"}
+.arch-bar-track{grid-column:1 / -1;height:3px;border-radius:var(--r-pill);background:oklch(0.30 0.020 250 / 0.5);margin-top:8px;overflow:hidden}
+.arch-bar-fill{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-hi));border-radius:var(--r-pill);box-shadow:0 0 12px var(--accent-glow)}
+.pullquote{margin-top:clamp(2.5rem,5vw,4rem);padding:clamp(2rem,4vw,3rem) 0;border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);position:relative}
+.pullquote::before{content:"";position:absolute;top:-1px;left:0;height:1px;width:80px;background:var(--accent);box-shadow:0 0 12px var(--accent-glow)}
+.pullquote-tag{font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.16em;text-transform:uppercase;color:var(--accent-hi);margin-bottom:var(--space-4)}
+.pullquote-text{font-family:var(--font-display);font-size:clamp(1.375rem,2.6vw,1.875rem);font-weight:400;line-height:1.32;letter-spacing:-0.025em;color:var(--ink);font-style:italic;text-wrap:pretty;max-width:32ch;margin-bottom:var(--space-4)}
+.pullquote-attr{font-family:var(--font-mono);font-size:var(--tx-xs);color:var(--ink-faint);letter-spacing:0.04em}
+.anclas{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-soft);border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border-soft);margin-top:clamp(2.5rem,5vw,4rem)}
+@media (max-width:760px){.anclas{grid-template-columns:1fr}}
+.ancla-cell{background:var(--bg);padding:clamp(1.5rem,3vw,2rem);transition:background-color var(--dur-med) var(--ease-out-quart)}
+.ancla-cell:hover{background:var(--surface-1)}
+.ancla-key{font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.16em;text-transform:uppercase;color:var(--accent-hi);margin-bottom:var(--space-3)}
+.ancla-h{font-family:var(--font-display);font-size:1.125rem;font-weight:500;letter-spacing:-0.02em;margin-bottom:var(--space-3);text-wrap:balance}
+.ancla-p{font-size:var(--tx-sm);color:var(--ink-muted);line-height:1.55;text-wrap:pretty}
+.ancla-p strong{color:var(--ink);font-weight:500}
+.timeline-wrap{position:relative;padding:clamp(2rem,4vw,3rem) 0 0}
+.timeline-track-wrap{position:relative;padding-top:28px}
+.timeline-track{position:absolute;top:28px;left:7%;right:7%;height:1px;background:linear-gradient(90deg,transparent,var(--border) 8%,var(--border) 92%,transparent)}
+.timeline-progress{position:absolute;top:28px;left:7%;height:1px;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-hi));box-shadow:0 0 8px var(--accent-glow)}
+.timeline-nodes{display:grid;grid-template-columns:repeat(7,1fr);gap:var(--space-2);position:relative}
+@media (max-width:900px){.timeline-nodes{grid-template-columns:repeat(4,1fr);gap:var(--space-4)}.timeline-track,.timeline-progress{display:none}}
+@media (max-width:560px){.timeline-nodes{grid-template-columns:repeat(2,1fr)}}
+.tnode{text-align:center;cursor:pointer;transition:transform var(--dur-med) var(--ease-out-quart)}
+.tnode:hover{transform:translateY(-4px)}
+.tnode:active{transform:translateY(-1px) scale(0.98)}
+@media (prefers-reduced-motion:reduce){.tnode,.tnode:hover,.tnode:active{transition:none;transform:none}}
+.tnode-dot{width:14px;height:14px;border-radius:var(--r-pill);background:var(--bg);border:2px solid var(--border-strong);margin:0 auto 14px;position:relative;transition:border-color var(--dur-med) var(--ease-out-quart),box-shadow var(--dur-med) var(--ease-out-quart),background-color var(--dur-med) var(--ease-out-quart)}
+.tnode:hover .tnode-dot{border-color:var(--accent);box-shadow:0 0 0 5px var(--accent-soft),0 0 18px var(--accent-glow);background:var(--accent)}
+.tnode.is-zero .tnode-dot{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft),0 0 16px var(--accent-glow)}
+.tnode-num{font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.14em;color:var(--ink-faint);margin-bottom:4px;text-transform:uppercase}
+.tnode-name{font-family:var(--font-display);font-size:var(--tx-sm);font-weight:500;letter-spacing:-0.015em;line-height:1.2;color:var(--ink);text-wrap:balance;padding:0 2px}
+.phase-section{margin-top:clamp(3rem,5vw,4rem)}
+.tabs{display:flex;gap:2px;padding:4px;background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-pill);margin-bottom:var(--space-8);overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:var(--r-pill);font-size:var(--tx-sm);font-weight:500;color:var(--ink-muted);white-space:nowrap;transition:color var(--dur-fast) var(--ease-out-quart),background-color var(--dur-med) var(--ease-out-quart);flex:1;justify-content:center;min-width:max-content}
+.tab:hover{color:var(--ink)}
+.tab:active{transform:scale(0.97)}
+.tab.is-active{background:var(--bg);color:var(--ink);box-shadow:0 1px 0 oklch(0.95 0.005 250 / 0.04) inset,0 8px 24px oklch(0.06 0.020 250 / 0.6)}
+.tab .tab-num{font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.08em;color:var(--ink-faint);font-weight:500}
+.tab.is-active .tab-num{color:var(--accent-hi)}
+@media (prefers-reduced-motion:reduce){.tab{transition:none}}
+.tabpanel{display:none}
+.tabpanel.is-active{display:block;animation:panelIn var(--dur-slow) var(--ease-out-expo)}
+@keyframes panelIn{from{opacity:0;transform:translateY(12px);filter:blur(4px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@media (prefers-reduced-motion:reduce){.tabpanel.is-active{animation:none}}
+.phase{background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:clamp(1.75rem,3.5vw,2.5rem)}
+.phase-head{display:grid;grid-template-columns:auto 1fr;gap:var(--space-6);align-items:center;padding-bottom:var(--space-6);border-bottom:1px solid var(--border-soft);margin-bottom:var(--space-6)}
+.phase-mega{font-family:var(--font-mono);font-size:clamp(3.5rem,6vw,4.5rem);font-weight:400;line-height:0.85;letter-spacing:-0.04em;color:var(--accent-hi);font-feature-settings:"tnum"}
+.phase-name{font-family:var(--font-display);font-size:clamp(1.5rem,2.4vw,1.875rem);font-weight:600;letter-spacing:-0.03em;line-height:1.1;margin-bottom:var(--space-3);text-wrap:balance}
+.phase-meta{display:flex;flex-wrap:wrap;gap:var(--space-4);font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-faint)}
+.phase-meta-item{display:inline-flex;align-items:center;gap:6px}
+.phase-meta-item::before{content:"";width:4px;height:4px;border-radius:var(--r-pill);background:var(--ink-faint)}
+.phase-intro{font-size:1.025rem;color:var(--ink-muted);line-height:1.6;text-wrap:pretty;margin-bottom:var(--space-6);max-width:62ch}
+.phase-intro .hi{color:var(--accent-hi);font-weight:500}
+.phase-sub{margin-bottom:var(--space-6)}.phase-sub:last-child{margin-bottom:0}
+.phase-sub-label{font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.16em;text-transform:uppercase;color:var(--accent-hi);margin-bottom:var(--space-4)}
+.checks{display:grid;gap:10px}
+.check{display:grid;grid-template-columns:24px 1fr;gap:14px;padding:12px 14px;background:var(--bg-2);border:1px solid var(--border-soft);border-radius:var(--r-md);transition:border-color var(--dur-med) var(--ease-out-quart),background-color var(--dur-med) var(--ease-out-quart)}
+.check:hover{border-color:var(--border);background:var(--surface-1)}
+.check-mark{width:24px;height:24px;border-radius:var(--r-sm);background:var(--accent-soft);color:var(--accent-hi);font-family:var(--font-mono);font-size:12px;font-weight:600;display:inline-flex;align-items:center;justify-content:center}
+.check-text{font-size:var(--tx-sm);color:var(--ink-muted);line-height:1.55}
+.check-text strong{color:var(--ink);font-weight:500}
+.hito{margin-top:var(--space-8);padding:var(--space-6);background:var(--success-soft);border:1px solid oklch(0.78 0.16 155 / 0.28);border-radius:var(--r-md);display:grid;grid-template-columns:1fr;gap:var(--space-2);position:relative;overflow:hidden}
+.hito::before{content:"";position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--success),transparent)}
+.hito-label{font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.18em;text-transform:uppercase;color:var(--success);font-weight:600}
+.hito-text{font-size:var(--tx-sm);color:var(--ink);line-height:1.55;font-weight:500;text-wrap:pretty}
+.econ{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6)}
+@media (max-width:880px){.econ{grid-template-columns:1fr}}
+.econ-card{background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:clamp(1.75rem,3vw,2.25rem)}
+.econ-card.alt{background:linear-gradient(180deg,var(--surface-1),oklch(0.22 0.025 250))}
+.econ-tag{font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:var(--space-4)}
+.econ-num{font-family:var(--font-mono);font-size:clamp(2.75rem,4.5vw,3.5rem);font-weight:500;line-height:1;letter-spacing:-0.045em;color:var(--ink);margin-bottom:var(--space-3);font-feature-settings:"tnum"}
+.econ-num .unit{font-size:0.45em;color:var(--ink-faint);font-weight:400;margin-left:6px}
+.econ-sub{font-size:var(--tx-sm);color:var(--ink-muted);margin-bottom:var(--space-6);line-height:1.55}
+.econ-sub strong{color:var(--ink);font-weight:500}
+.spec-table{width:100%;border-collapse:collapse;font-size:var(--tx-sm)}
+.spec-table th{text-align:left;font-family:var(--font-mono);font-size:var(--tx-micro);font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-faint);padding:10px 0;border-bottom:1px solid var(--border-soft)}
+.spec-table td{padding:14px 0;color:var(--ink-muted);border-bottom:1px solid oklch(0.30 0.020 250 / 0.25)}
+.spec-table tr:last-child td{border-bottom:none}
+.spec-table td.num{text-align:right;font-family:var(--font-mono);color:var(--ink);font-feature-settings:"tnum"}
+.spec-table tr.total td{padding-top:18px;font-weight:600;color:var(--ink);border-top:1px solid var(--border)}
+.spec-table tr.total td.num{color:var(--accent-hi);font-size:1rem}
+.member-note{margin-top:var(--space-3);padding:var(--space-4);background:var(--bg-2);border-radius:var(--r-md);border:1px solid var(--border-soft);font-size:var(--tx-sm);color:var(--ink-muted);line-height:1.55}
+.member-note strong{color:var(--accent-hi);font-weight:500}
+.productos-wrap{margin-top:clamp(2.5rem,4vw,3rem)}
+.productos-head{font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:var(--space-6)}
+.productos{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-3)}
+@media (max-width:720px){.productos{grid-template-columns:1fr 1fr}}
+@media (max-width:440px){.productos{grid-template-columns:1fr}}
+.prod{padding:var(--space-4);background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-md);transition:border-color var(--dur-med) var(--ease-out-quart),transform var(--dur-med) var(--ease-out-quart)}
+.prod:hover{border-color:var(--border);transform:translateY(-2px)}
+.prod.featured{background:linear-gradient(180deg,var(--accent-soft),var(--surface-1));border-color:var(--accent-edge)}
+.prod-tag{font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:var(--space-3)}
+.prod.featured .prod-tag{color:var(--accent-hi)}
+.prod-name{font-family:var(--font-display);font-size:var(--tx-sm);font-weight:500;letter-spacing:-0.015em;color:var(--ink);line-height:1.3;text-wrap:balance}
+.sim{background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:clamp(2rem,4vw,2.5rem);margin-top:clamp(2rem,4vw,3rem);position:relative;overflow:hidden}
+.sim::before{content:"";position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle at top right,var(--accent-soft),transparent 70%);pointer-events:none}
+.sim-head{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--space-6);margin-bottom:var(--space-8);flex-wrap:wrap;position:relative}
+.sim-title{font-family:var(--font-display);font-size:clamp(1.375rem,2.4vw,1.625rem);font-weight:500;letter-spacing:-0.025em;line-height:1.2;margin-bottom:var(--space-2);text-wrap:balance}
+.sim-sub{font-size:var(--tx-sm);color:var(--ink-muted);max-width:48ch}
+.sim-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(2rem,4vw,3rem);align-items:start;position:relative}
+@media (max-width:880px){.sim-grid{grid-template-columns:1fr}}
+.slider-row{margin-bottom:var(--space-6)}
+.slider-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--space-3)}
+.slider-name{font-size:var(--tx-sm);color:var(--ink-muted);max-width:36ch}
+.slider-val{font-family:var(--font-mono);font-size:1.5rem;font-weight:500;letter-spacing:-0.02em;color:var(--accent-hi);font-feature-settings:"tnum";font-variant-numeric:tabular-nums}
+input[type="range"]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:var(--r-pill);background:var(--border-soft);outline:none;cursor:pointer}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:var(--r-pill);background:var(--accent);border:2px solid var(--bg);cursor:pointer;transition:transform var(--dur-fast) var(--ease-out-quart),box-shadow var(--dur-med) var(--ease-out-quart);box-shadow:0 0 0 0 var(--accent-soft),0 4px 14px var(--accent-glow)}
+input[type="range"]::-webkit-slider-thumb:hover{box-shadow:0 0 0 8px var(--accent-soft),0 8px 18px var(--accent-glow)}
+input[type="range"]:active::-webkit-slider-thumb{transform:scale(1.12)}
+input[type="range"]::-moz-range-thumb{width:22px;height:22px;border-radius:var(--r-pill);background:var(--accent);border:2px solid var(--bg);cursor:pointer}
+.sim-out{background:var(--bg);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:var(--space-6)}
+.sim-out-h{font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:var(--space-4);font-weight:500}
+.sim-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid oklch(0.30 0.020 250 / 0.3)}
+.sim-row:last-of-type{border-bottom:none}
+.sim-who{font-size:var(--tx-sm);color:var(--ink-muted)}
+.sim-amt{font-family:var(--font-mono);font-size:1rem;font-weight:500;color:var(--ink);font-feature-settings:"tnum"}
+.sim-row.hi{background:var(--accent-soft);margin:var(--space-2) calc(-1 * var(--space-4));padding:12px var(--space-4);border-radius:var(--r-md);border-bottom:none}
+.sim-row.hi .sim-who{color:var(--accent-hi);font-weight:500}
+.sim-row.hi .sim-amt{color:var(--accent-hi)}
+.sim-row.roi{background:var(--success-soft);margin-top:var(--space-3);padding:16px var(--space-4);border-radius:var(--r-md);border-bottom:none;border:1px solid oklch(0.78 0.16 155 / 0.28)}
+.sim-row.roi .sim-who{color:var(--success);font-weight:600;font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.14em;text-transform:uppercase}
+.sim-row.roi .sim-amt{color:var(--success);font-size:1.625rem}
+.sim-note{margin-top:var(--space-6);padding:var(--space-4);background:var(--warn-soft);border-radius:var(--r-md);font-size:var(--tx-sm);color:var(--ink-muted);line-height:1.55}
+.sim-note strong{color:var(--warn);font-weight:500}
+.sim-note .em{color:var(--ink);font-weight:500}
+.clausulas{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6)}
+@media (max-width:760px){.clausulas{grid-template-columns:1fr}}
+.clausula{padding:clamp(1.75rem,3vw,2.25rem);background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-lg)}
+.clausula-head{display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-6);padding-bottom:var(--space-4);border-bottom:1px solid var(--border-soft)}
+.clausula-tag{font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.14em;text-transform:uppercase;color:var(--accent-hi);padding:5px 11px;background:var(--accent-soft);border-radius:var(--r-pill);font-weight:500}
+.clausula-list{display:grid;gap:var(--space-3)}
+.cta-final{padding:clamp(4rem,8vw,6rem) clamp(2rem,5vw,4rem);background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-lg);text-align:center;position:relative;overflow:hidden}
+.cta-final::before{content:"";position:absolute;top:-50%;left:-10%;right:-10%;height:100%;background:radial-gradient(ellipse at center,var(--accent-soft),transparent 60%);pointer-events:none}
+.cta-final>*{position:relative}
+.cta-eyebrow{font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.18em;text-transform:uppercase;color:var(--accent-hi);margin-bottom:var(--space-4)}
+.cta-h{font-family:var(--font-display);font-size:clamp(1.875rem,3.6vw,2.75rem);font-weight:600;letter-spacing:-0.035em;line-height:1.1;margin-bottom:var(--space-4);text-wrap:balance;max-width:22ch;margin-left:auto;margin-right:auto}
+.cta-h em{color:var(--accent-hi);font-style:italic;font-weight:500}
+.cta-p{font-size:1.025rem;color:var(--ink-muted);max-width:52ch;margin:0 auto var(--space-8);line-height:1.55;text-wrap:pretty}
+.cta-validity{margin-top:var(--space-6);font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.12em;color:var(--ink-faint);text-transform:uppercase}
+.cta-validity strong{color:var(--ink-muted);font-weight:500}
+footer{padding:clamp(3rem,5vw,4rem) 0;border-top:1px solid var(--border-soft);margin-top:clamp(4rem,8vw,6rem);text-align:center;font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.12em;color:var(--ink-faint);text-transform:uppercase;line-height:1.8}
+footer strong{color:var(--ink-muted);font-weight:500}
+.reveal{opacity:1;transform:translateY(0)}
+.js-on .reveal{opacity:0;transform:translateY(20px)}
+.js-on .reveal.in{opacity:1;transform:translateY(0);transition:opacity 0.8s var(--ease-out-expo),transform 0.8s var(--ease-out-expo)}
+@media (prefers-reduced-motion:reduce){.js-on .reveal{opacity:1;transform:none}.js-on .reveal.in{transition:none}}
 </style>
 </head>
 <body>
-
-<div class="topstrip">
-  <div class="topstrip-inner">
-    <div class="sigil">
-      <div class="sigil-mark"></div>
-      Nathalia &amp; Jorge
-    </div>
-    <div class="status-pill">Propuesta · Confidencial</div>
-  </div>
-</div>
-
-<!-- =================== HERO con VANTA NET background =================== -->
-<header class="hero">
-  <div id="hero-vanta" aria-hidden="true"></div>
-  <div class="container">
-    <div class="hero-grid">
-      <div class="reveal">
-        <div class="hero-eyebrow">Acompañamiento estratégico, 6 meses</div>
-        <h1 class="hero-title">Construyamos juntos el ecosistema que tu <span class="accent">visión a 24 meses</span> exige.</h1>
-        <p class="hero-sub">
-          Una propuesta diseñada para <strong>David Alexander Aponte Becerra</strong> a partir del diagnóstico del 22 de mayo de 2026. No es una agencia más, es una sociedad con piel en el juego para construir tu autoridad, tu metodología y tu ecosistema digital en Hotmart.
-        </p>
-        <div class="hero-ctas">
-          <a href="#cta" class="btn btn-primary">Agendar sesión de decisión <span class="btn-arrow">→</span></a>
-          <a href="#metodo" class="btn btn-ghost">Ver el método</a>
-        </div>
-      </div>
-
-      <aside class="memo reveal" id="memoCard" aria-label="Expediente">
-        <div class="memo-head">
-          <div class="memo-tag">Expediente</div>
-          <div class="memo-case">N&amp;J / DA, 26 / 05</div>
-        </div>
-        <div class="memo-row"><div class="memo-key">Cliente</div><div class="memo-val">David A. Aponte B.</div></div>
-        <div class="memo-row"><div class="memo-key">Sector</div><div class="memo-val">Educación financiera</div></div>
-        <div class="memo-row"><div class="memo-key">Arquetipo</div><div class="memo-val hi">Maestro Digital</div></div>
-        <div class="memo-row"><div class="memo-key">Madurez</div><div class="memo-val">75 / 100</div></div>
-        <div class="memo-row"><div class="memo-key">Meta 6 meses</div><div class="memo-val hi">$80M COP / mes</div></div>
-        <div class="memo-row"><div class="memo-key">Duración</div><div class="memo-val">6 meses, 7 hitos</div></div>
-        <div class="memo-row"><div class="memo-key">Equipo</div><div class="memo-val">Nathalia, Jorge, producción</div></div>
-        <div class="memo-row"><div class="memo-key">Validez</div><div class="memo-val">15 días</div></div>
-      </aside>
-    </div>
-  </div>
-</header>
-
-<!-- =================== MOMENTO CERO =================== -->
-<section>
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-label">Momento cero</div>
-      <h2 class="section-title">Esta propuesta no nace <em>en frío</em>.</h2>
-      <p class="section-lead">
-        Antes de cobrarte un peso, ya invertimos tiempo en entenderte. El Momento Cero es la base sobre la que se construye todo lo demás.
-      </p>
-    </div>
-
-    <div class="statbar reveal">
-      <div class="stat">
-        <div class="stat-num" data-count="1">0</div>
-        <div class="stat-label">Reunión exploratoria</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num" data-count="33">0</div>
-        <div class="stat-label">Preguntas respondidas</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num" data-count="8">0</div>
-        <div class="stat-label">Dimensiones analizadas</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num"><span data-count="75">0</span><span class="frac">/100</span></div>
-        <div class="stat-label">Madurez promedio</div>
-      </div>
-    </div>
-
-    <div class="momento-grid">
-      <div class="momento-item reveal">
-        <div class="momento-key">22 de mayo de 2026</div>
-        <h3 class="momento-h">Reunión exploratoria</h3>
-        <p class="momento-p">
-          Sesión donde nos contaste tu visión, tus frustraciones y tu trayectoria como contador javeriano, mentor iNNpulsa y columnista de Portafolio. Ahí confirmamos que hay encaje real entre tu momento y nuestra forma de trabajar como <strong>socios estratégicos de marca y metodología</strong>.
-        </p>
-      </div>
-      <div class="momento-item reveal">
-        <div class="momento-key">Diagnóstico estructurado</div>
-        <h3 class="momento-h">33 preguntas, 8 dimensiones</h3>
-        <p class="momento-p">
-          Cuestionario interactivo que respondiste. Resultado: arquetipo dominante <strong>Maestro Digital</strong> (23 %), complementarios <strong>Conferencista Mediático</strong> (19 %) y <strong>Líder de Comunidad</strong> (13 %). Diferencial declarado: <strong>"método pedagógico paso a paso replicable"</strong>.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =================== PERFIL ESTRATÉGICO =================== -->
-<section>
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-label">Tu perfil estratégico</div>
-      <h2 class="section-title">Eres un perfil <em>híbrido</em>, y eso es bueno.</h2>
-      <p class="section-lead">
-        No eres un coach más. No eres un conferencista más. No eres un community builder más. Eres los tres a la vez, y por eso necesitas una propuesta que orqueste los tres mundos.
-      </p>
-    </div>
-
-    <div class="perfil-wrap">
-      <div class="reveal">
-        <div class="arch-main">Arquetipo dominante</div>
-        <div class="arch-headline">El Maestro Digital <span class="pct">23 %</span></div>
-        <p class="arch-body">
-          Eres quien <strong>empaqueta su conocimiento en metodología replicable</strong>. Tu mente piensa en escalera (básico, intermedio, avanzado), tu producto natural son cursos estructurados y tu instinto es <strong>enseñar, no solo inspirar</strong>.
-        </p>
-        <p class="arch-body">
-          Pero los complementarios revelan más: aspiras a escenarios mediáticos (Conferencista, 19 %) y quieres construir pertenencia (Líder de Comunidad, 13 %). Esa combinación es la de un emprendedor digital de alto impacto en LATAM.
-        </p>
-      </div>
-
-      <aside class="arch-side reveal">
-        <div class="arch-side-label">Complementarios y madurez</div>
-        <div class="arch-bar"><div class="arch-bar-name">Conferencista Mediático</div><div class="arch-bar-pct">19 %</div><div class="arch-bar-track"><span class="arch-bar-fill" data-fill="19"></span></div></div>
-        <div class="arch-bar"><div class="arch-bar-name">Líder de Comunidad</div><div class="arch-bar-pct">13 %</div><div class="arch-bar-track"><span class="arch-bar-fill" data-fill="13"></span></div></div>
-        <div class="arch-bar"><div class="arch-bar-name">Autor Experto</div><div class="arch-bar-pct">11 %</div><div class="arch-bar-track"><span class="arch-bar-fill" data-fill="11"></span></div></div>
-        <div class="arch-bar"><div class="arch-bar-name">Estratega Premium</div><div class="arch-bar-pct">10 %</div><div class="arch-bar-track"><span class="arch-bar-fill" data-fill="10"></span></div></div>
-      </aside>
-    </div>
-
-    <div class="pullquote reveal">
-      <div class="pullquote-tag">El ancla de esta propuesta</div>
-      <p class="pullquote-text">
-        "Que sean iguales a todas las agencias y consultores que he contratado hasta ahora, muchas palabras, pocos resultados pero sí alta preocupación por facturar mensualmente. Que no se tenga conocimiento específico en los retos a resolver."
-      </p>
-      <div class="pullquote-attr">David Aponte, diagnóstico del 22 / 05 / 2026, campo abierto</div>
-    </div>
-
-    <div class="anclas reveal">
-      <div class="ancla-cell">
-        <div class="ancla-key">Objeción</div>
-        <h4 class="ancla-h">Piel en el juego, no facturación opaca.</h4>
-        <p class="ancla-p">
-          Por eso el modelo combina <strong>fijo razonable</strong> y <strong>coproducción Hotmart perpetua</strong>. Nuestro mayor retorno depende de tu éxito real, no del calendario.
-        </p>
-      </div>
-      <div class="ancla-cell">
-        <div class="ancla-key">Tiempo</div>
-        <h4 class="ancla-h">Break-even al mes 3.</h4>
-        <p class="ancla-p">
-          Lo dijiste claro. Por eso el <strong>mes 4 (Lanzamiento Hotmart)</strong> ya tiene flujo recurrente entrando. La membresía fundadora se lanza con tu audiencia caliente.
-        </p>
-      </div>
-      <div class="ancla-cell">
-        <div class="ancla-key">Meta</div>
-        <h4 class="ancla-h">$80M COP mensuales sostenibles.</h4>
-        <p class="ancla-p">
-          500 a 1000 miembros activos, libro publicado, MVP de la app, 4 cursos generando. Todo eso se ordena en <strong>Momento Cero + 6 meses</strong>.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =================== ROADMAP / TIMELINE =================== -->
-<section id="metodo">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-label">El roadmap</div>
-      <h2 class="section-title">Momento Cero más 6 meses, <em>7 hitos verificables</em>.</h2>
-      <p class="section-lead">
-        Cada fase tiene un hito medible. Si no lo cumplimos, el mes siguiente va sin cargo hasta corregirlo. Esto no es marketing, es contractual.
-      </p>
-    </div>
-
-    <div class="timeline-wrap reveal">
-      <div class="timeline-track-wrap">
-        <div class="timeline-track"></div>
-        <div class="timeline-progress" id="tlProgress"></div>
-        <div class="timeline-nodes">
-          <button class="tnode is-zero" type="button" data-target="" aria-label="Momento Cero ya completado">
-            <div class="tnode-dot"></div>
-            <div class="tnode-num">Ya hecho</div>
-            <div class="tnode-name">Momento Cero</div>
-          </button>
-          <button class="tnode" type="button" data-target="p1">
-            <div class="tnode-dot"></div>
-            <div class="tnode-num">Mes 1</div>
-            <div class="tnode-name">Sanar lo Roto</div>
-          </button>
-          <button class="tnode" type="button" data-target="p2">
-            <div class="tnode-dot"></div>
-            <div class="tnode-num">Mes 2</div>
-            <div class="tnode-name">Kit de Marca Maestro</div>
-          </button>
-          <button class="tnode" type="button" data-target="p3">
-            <div class="tnode-dot"></div>
-            <div class="tnode-num">Mes 3</div>
-            <div class="tnode-name">Ruta del Estudiante</div>
-          </button>
-          <button class="tnode" type="button" data-target="p4">
-            <div class="tnode-dot"></div>
-            <div class="tnode-num">Mes 4</div>
-       
+<div class="topstrip"><div class="topstrip-inner"><div class="sigil"><div class="sigil-mark"></div>Nathalia &amp; Jorge</div><div class="status-pill">Propuesta · Confidencial</div></div></div>
+<header class="hero"><div id="hero-vanta" aria-hidden="true"></div><div class="container"><div class="hero-grid"><div class="reveal"><div class="hero-eyebrow">Acompañamiento estratégico, 6 meses</div><h1 class="hero-title">Construyamos juntos el ecosistema que tu <span class="accent">visión a 24 meses</span> exige.</h1><p class="hero-sub">Una propuesta diseñada para <strong>David Alexander Aponte Becerra</strong> a partir del diagnóstico del 22 de mayo de 2026. No es una agencia más, es una sociedad con piel en el juego para construir tu autoridad, tu metodología y tu ecosistema digital en Hotmart.</p><div class="hero-ctas"><a href="#cta" class="btn btn-primary">Agendar sesión de decisión <span class="btn-arrow">→</span></a><a href="#metodo" class="btn btn-ghost">Ver el método</a></div></div><aside class="memo reveal" id="memoCard" aria-label="Expediente"><div class="memo-head"><div class="memo-tag">Expediente</div><div class="memo-case">N&amp;J / DA, 26 / 05</div></div><div class="memo-row"><div class="memo-key">Cliente</div><div class="memo-val">David A. Aponte B.</div></div><div class="memo-row"><div class="memo-key">Sector</div><div class="memo-val">Educación financiera</div></div><div class="memo-row"><div class="memo-key">Arquetipo</div><div class="memo-val hi">Maestro Digital</div></div><div class="memo-row"><div class="memo-key">Madurez</div><div class="memo-val">75 / 100</div></div><div class="memo-row"><div class="memo-key">Meta 6 meses</div><div class="memo-val hi">$80M COP / mes</div></div><div class="memo-row"><div class="memo-key">Duración</div><div class="memo-val">6 meses, 7 hitos</div></div><div class="memo-row"><div class="memo-key">Equipo</div><div class="memo-val">Nathalia, Jorge, producción</div></div><div class="memo-row"><div class="memo-key">Validez</div><div class="memo-val">15 días</div></div></aside></div></div></header>
+<section><div class="container"><div class="section-head reveal"><div class="section-label">Momento cero</div><h2 class="section-title">Esta propuesta no nace <em>en frío</em>.</h2><p class="section-lead">Antes de cobrarte un peso, ya invertimos tiempo en entenderte. El Momento Cero es la base sobre la que se construye todo lo demás.</p></div><div class="statbar reveal"><div class="stat"><div class="stat-num" data-count="1">0</div><div class="stat-label">Reunión exploratoria</div></div><div class="stat"><div class="stat-num" data-count="33">0</div><div class="stat-label">Preguntas respondidas</div></div><div class="stat"><div class="stat-num" data-count="8">0</div><div class="stat-label">Dimensiones analizadas</div></div><div class="stat"><div class="stat-num"><span data-count="75">0</span><span class="frac">/100</span></div><div class="stat-label">Madurez promedio</div></div></div><div class="momento-grid"><div class="momento-item reveal"><div class="momento-key">22 de mayo de 2026</div><h3 class="momento-h">Reunión exploratoria</h3><p class="momento-p">Sesión donde nos contaste tu visión, tus frustraciones y tu trayectoria como contador javeriano, mentor iNNpulsa y columnista de Portafolio. Ahí confirmamos que hay encaje real entre tu momento y nuestra forma de trabajar como <strong>socios estratégicos de marca y metodología</strong>.</p></div><div class="momento-item reveal"><div class="momento-key">Diagnóstico estructurado</div><h3 class="momento-h">33 preguntas, 8 dimensiones</h3><p class="momento-p">Cuestionario interactivo que respondiste. Resultado: arquetipo dominante <strong>Maestro Digital</strong> (23 %), complementarios <strong>Conferencista Mediático</strong> (19 %) y <strong>Líder de Comunidad</strong> (13 %). Diferencial declarado: <strong>"método pedagógico paso a paso replicable"</strong>.</p></div></div></div></section>
+<section><div class="container"><div class="section-head reveal"><div class="section-label">Tu perfil estratégico</div><h2 class="section-title">Eres un perfil <em>híbrido</em>, y eso es bueno.</h2><p class="section-lead">No eres un coach más. No eres un conferencista más. No eres un community builder más. Eres los tres a la vez, y por eso necesitas una propuesta que orqueste los tres mundos.</p></div><div class="perfil-wrap"><div class="reveal"><div class="arch-main">Arquetipo dominante</div><div class="arch-headline">El Maestro Digital <span class="pct">23 %</span></div><p class="arch-body">Eres quien <strong>empaqueta su conocimiento en metodología replicable</strong>. Tu mente piensa en escalera (básico, intermedio, avanzado), tu producto natural son cursos estructurados y tu instinto es <strong>enseñar, no solo inspirar</strong>.</p><p class="arch-body">Pero los complementarios revelan más: aspiras a escenarios mediáticos (Conferencista, 19 %) y quieres construir pertenencia (Líder de Comunidad, 13 %). Esa combinación es la de un emprendedor digital de alto impacto en LATAM.</p></div><aside class="arch-side reveal"><div class="arch-side-label">Complementarios y madurez</div><div class="arch-bar"><div class="arch-bar-name">Conferencista Mediático</div><div class="arch-bar-pct">19 %</div><div class="arch-bar-track"><span class="arch-bar-fill" data-fill="19"></span></div></div><div class="arch-bar"><div class="arch-bar-name">Líder de Comunidad</div><div class="arch-bar-pct">13 %</div><div class="arch-bar-track"><span class="arch-bar-fill" data-fill="13"></span></div></div><div class="arch-bar"><div class="arch-bar-name">Autor Experto</div><div class="arch-bar-pct">11 %</div><div class="arch-bar-track"><span class="arch-bar-fill" data-fill="11"></span></div></div><div class="arch-bar"><div class="arch-bar-name">Estratega Premium</div><div class="arch-bar-pct">10 %</div><div class="arch-bar-track"><span class="arch-bar-fill" data-fill="10"></span></div></div></aside></div><div class="pullquote reveal"><div class="pullquote-tag">El ancla de esta propuesta</div><p class="pullquote-text">"Que sean iguales a todas las agencias y consultores que he contratado hasta ahora, muchas palabras, pocos resultados pero sí alta preocupación por facturar mensualmente. Que no se tenga conocimiento específico en los retos a resolver."</p><div class="pullquote-attr">David Aponte, diagnóstico del 22 / 05 / 2026, campo abierto</div></div><div class="anclas reveal"><div class="ancla-cell"><div class="ancla-key">Objeción</div><h4 class="ancla-h">Piel en el juego, no facturación opaca.</h4><p class="ancla-p">Por eso el modelo combina <strong>fijo razonable</strong> y <strong>coproducción Hotmart perpetua</strong>. Nuestro mayor retorno depende de tu éxito real, no del calendario.</p></div><div class="ancla-cell"><div class="ancla-key">Tiempo</div><h4 class="ancla-h">Break-even al mes 3.</h4><p class="ancla-p">Lo dijiste claro. Por eso el <strong>mes 4 (Lanzamiento Hotmart)</strong> ya tiene flujo recurrente entrando. La membresía fundadora se lanza con tu audiencia caliente.</p></div><div class="ancla-cell"><div class="ancla-key">Meta</div><h4 class="ancla-h">$80M COP mensuales sostenibles.</h4><p class="ancla-p">500 a 1000 miembros activos, libro publicado, MVP de la app, 4 cursos generando. Todo eso se ordena en <strong>Momento Cero + 6 meses</strong>.</p></div></div></div></section>
+<section id="metodo"><div class="container"><div class="section-head reveal"><div class="section-label">El roadmap</div><h2 class="section-title">Momento Cero más 6 meses, <em>7 hitos verificables</em>.</h2><p class="section-lead">Cada fase tiene un hito medible. Si no lo cumplimos, el mes siguiente va sin cargo hasta corregirlo. Esto no es marketing, es contractual.</p></div><div class="timeline-wrap reveal"><div class="timeline-track-wrap"><div class="timeline-track"></div><div class="timeline-progress" id="tlProgress"></div><div class="timeline-nodes"><button class="tnode is-zero" type="button" data-target=""><div class="tnode-dot"></div><div class="tnode-num">Ya hecho</div><div class="tnode-name">Momento Cero</div></button><button class="tnode" type="button" data-target="p1"><div class="tnode-dot"></div><div class="tnode-num">Mes 1</div><div class="tnode-name">Sanar lo Roto</div></button><button class="tnode" type="button" data-target="p2"><div class="tnode-dot"></div><div class="tnode-num">Mes 2</div><div class="tnode-name">Kit de Marca Maestro</div></button><button class="tnode" type="button" data-target="p3"><div class="tnode-dot"></div><div class="tnode-num">Mes 3</div><div class="tnode-name">Ruta del Estudiante</div></button><button class="tnode" type="button" data-target="p4"><div class="tnode-dot"></div><div class="tnode-num">Mes 4</div><div class="tnode-name">Lanzamiento Hotmart</div></button><button class="tnode" type="button" data-target="p5"><div class="tnode-dot"></div><div class="tnode-num">Mes 5</div><div class="tnode-name">Pitch y SPEAKER</div></button><button class="tnode" type="button" data-target="p6"><div class="tnode-dot"></div><div class="tnode-num">Mes 6</div><div class="tnode-name">Guías Académicas</div></button></div></div></div>
+<div class="phase-section reveal"><div class="tabs" role="tablist"><button class="tab is-active" role="tab" data-target="p1"><span class="tab-num">M1</span>Sanar lo Roto</button><button class="tab" role="tab" data-target="p2"><span class="tab-num">M2</span>Kit de Marca Maestro</button><button class="tab" role="tab" data-target="p3"><span class="tab-num">M3</span>Ruta del Estudiante</button><button class="tab" role="tab" data-target="p4"><span class="tab-num">M4</span>Lanzamiento Hotmart</button><button class="tab" role="tab" data-target="p5"><span class="tab-num">M5</span>Pitch y SPEAKER</button><button class="tab" role="tab" data-target="p6"><span class="tab-num">M6</span>Guías Académicas</button></div>
+<div class="tabpanel is-active" id="p1"><div class="phase"><div class="phase-head"><div class="phase-mega">01</div><div><h3 class="phase-name">Sanar lo Roto</h3><div class="phase-meta"><span class="phase-meta-item">Mes 1</span><span class="phase-meta-item">1 hito</span><span class="phase-meta-item">Alta intensidad</span></div></div></div><p class="phase-intro">Antes de construir nada nuevo, blindamos lo que ya existe. <span class="hi">Auditoría completa de activos digitales</span>, saneamiento de lo que está sangrando, y conversión del diagnóstico en activo de captación.</p><div class="phase-sub"><div class="phase-sub-label">Auditoría digital completa</div><div class="checks"><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Revisión integral de activos visibles</strong>: web actual, perfiles sociales, curso Transformación Financiera, lead magnet, video GoAnimate, AMV vencida, copy en inglés.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Inventario de servicios digitales</strong>, corrección de inconsistencias, disclaimers legales.</div></div></div></div><div class="phase-sub"><div class="phase-sub-label">LinkedIn y redes</div><div class="checks"><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>LinkedIn refactor profundo</strong>: bio, headline, destacados, foto profesional, prueba social, primeras piezas de manifiesto.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Redes</strong>: Instagram y TikTok con handles unificados, bio coherente, eliminación del contenido que erosiona la promesa.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text">Reemplazo del <strong>video GoAnimate</strong> por video profesional con tu rostro y tu voz.</div></div></div></div><div class="phase-sub"><div class="phase-sub-label">Sanar rotas</div><div class="checks"><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Corrección AMV vencida</strong>: gestión completa del trámite con el Autorregulador del Mercado de Valores.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Corrección de copy en inglés</strong> dentro del curso, revisión integral de toda la oferta.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Reemplazo del lead magnet falso</strong> por uno real, alineado con Transformación Financiera.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text">Auditoría legal de <strong>testimonios, claims financieros y disclaimers</strong>.</div></div></div></div><div class="phase-sub"><div class="phase-sub-label">Diagnóstico para prospectos</div><div class="checks"><div class="check"><div class="check-mark">★</div><div class="check-text"><strong>El mismo diagnóstico que tú respondiste se convierte en herramienta de captación</strong>. Cualifica prospectos automáticamente, segmenta por arquetipo, genera leads calificados.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text">Setup técnico, diseño visual e integración a tu nueva web.</div></div></div></div><div class="hito"><div class="hito-label">Hito mes 1</div><div class="hito-text">Cero banderas rojas visibles, LinkedIn al estándar All Star, AMV vigente, diagnóstico para prospectos publicado y captando.</div></div></div></div>
+<div class="tabpanel" id="p2"><div class="phase"><div class="phase-head"><div class="phase-mega">02</div><div><h3 class="phase-name">Kit de Marca Maestro</h3><div class="phase-meta"><span class="phase-meta-item">Mes 2</span><span class="phase-meta-item">1 hito</span><span class="phase-meta-item">El mes más denso</span></div></div></div><p class="phase-intro">El mes más estratégico de todo el acompañamiento. Definimos el <span class="hi">método</span>, la <span class="hi">esencia</span> y entregamos el <span class="hi">Documento Maestro de 7 capítulos</span>.</p><div class="phase-sub"><div class="phase-sub-label">Método, definir el "yo" de David</div><div class="checks"><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Enseñar</strong>: qué se enseña, en qué orden, con qué profundidad.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Evaluar</strong>: cómo se mide el avance del estudiante.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Alegrías del estudiante</strong>: qué celebra, qué le emociona aprender.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Frustraciones del estudiante</strong>: dónde se traba, qué necesita desbloquear.</div></div></div></div><div class="phase-sub"><div class="phase-sub-label">Pilares pedagógicos y perfil del estudiante</div><div class="checks"><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Pilares pedagógicos</strong>: los 3 a 5 fundamentos que sostienen toda la enseñanza.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Perfil del estudiante ideal</strong>: a quién enseña David, en qué momento de vida.</div></div></div></div><div class="phase-sub"><div class="phase-sub-label">Activos digitales</div><div class="checks"><div class="check"><div class="check-mark">@</div><div class="check-text"><strong>Handles</strong>: nombres unificados en todas las redes, claim de dominios.</div></div><div class="check"><div class="check-mark">→</div><div class="check-text"><strong>Link maestro</strong>: URL central que organiza todo tu ecosistema.</div></div><div class="check"><div class="check-mark">✉</div><div class="check-text"><strong>Newsletter propia</strong>: setup técnico, plantilla, primer envío.</div></div></div></div><div class="phase-sub"><div class="phase-sub-label">Esencia de marca</div><div class="checks"><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Arquetipo</strong> de marca consolidado y declarado.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Propuesta de Valor</strong> única en una línea.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Valores diferenciales</strong>: los 3 no negociables que te separan de Juan Diego Gómez, Club de Inversionistas, Nicolás Abril.</div></div></div></div><div class="phase-sub"><div class="phase-sub-label">Documento Maestro, 7 capítulos</div><div class="checks"><div class="check"><div class="check-mark">1</div><div class="check-text"><strong>Manifiesto</strong>, qué defendemos, qué rechazamos.</div></div><div class="check"><div class="check-mark">2</div><div class="check-text"><strong>Quién soy</strong>, biografía estratégica.</div></div><div class="check"><div class="check-mark">3</div><div class="check-text"><strong>Propósito</strong>, el porqué profundo.</div></div><div class="check"><div class="check-mark">4</div><div class="check-text"><strong>Valores de Marca</strong>, los no negociables operativos.</div></div><div class="check"><div class="check-mark">5</div><div class="check-text"><strong>Arquetipo aplicado</strong>: color, tono comunicativo, fama.</div></div><div class="check"><div class="check-mark">6</div><div class="check-text"><strong>Pilares de comunicación</strong>, los temas centrales.</div></div><div class="check"><div class="check-mark">7</div><div class="check-text"><strong>Cliente ideal</strong>, segmentación B2B y B2C en 3 arquetipos.</div></div></div></div><div class="hito"><div class="hito-label">Hito mes 2</div><div class="hito-text">Documento Maestro de 7 capítulos firmado, activos digitales operativos, esencia de marca consolidada, perfiles de cliente B2B y B2C definidos.</div></div></div></div>
+<div class="tabpanel" id="p3"><div class="phase"><div class="phase-head"><div class="phase-mega">03</div><div><h3 class="phase-name">Ruta del Estudiante</h3><div class="phase-meta"><span class="phase-meta-item">Mes 3</span><span class="phase-meta-item">1 hito</span><span class="phase-meta-item">Estructural</span></div></div></div><p class="phase-intro">Convertimos el método en una <span class="hi">arquitectura pedagógica replicable</span>. Tu diferencial declarado ("método paso a paso replicable") pasa de promesa a sistema.</p><div class="phase-sub"><div class="phase-sub-label">Metodología y esqueleto</div><div class="checks"><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Esqueleto metodológico</strong>, estructura modular de la enseñanza completa.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text">Secuencia de aprendizaje y <strong>micrologros</strong> por etapa.</div></div></div></div><div class="phase-sub"><div class="phase-sub-label">Ruta del estudiante en 3 niveles</div><div class="checks"><div class="check"><div class="check-mark">A</div><div class="check-text"><strong>Principiante</strong>, punto de entrada, conceptos base, primeras victorias rápidas.</div></div><div class="check"><div class="check-mark">B</div><div class="check-text"><strong>Medio</strong>, consolidación, hábitos, primeras decisiones financieras propias.</div></div><div class="check"><div class="check-mark">C</div><div class="check-text"><strong>Avanzado</strong>, sofisticación, optimización, autonomía financiera real.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Contenidos por nivel</strong> definidos.</div></div></div></div><div class="phase-sub"><div class="phase-sub-label">Sistema de evaluación</div><div class="checks"><div class="check"><div class="check-mark">✓</div><div class="check-text">La promesa medible <strong>"tendrá un plan financiero personal claro"</strong> se vuelve verificable.</div></div></div></div><div class="hito"><div class="hito-label">Hito mes 3</div><div class="hito-text">Esqueleto metodológico, Ruta del Estudiante en 3 niveles diseñada y documentada, sistema de evaluación construido.</div></div></div></div>
+<div class="tabpanel" id="p4"><div class="phase"><div class="phase-head"><div class="phase-mega">04</div><div><h3 class="phase-name">Lanzamiento Hotmart</h3><div class="phase-meta"><span class="phase-meta-item">Mes 4</span><span class="phase-meta-item">Break-even</span><span class="phase-meta-item">Dinero entrando</span></div></div></div><p class="phase-intro">Aquí cumplimos tu <span class="hi">compromiso de break-even</span>. Construimos los <span class="hi">artefactos</span> y lanzamos en Hotmart con cobro recurrente entrando antes de mitad del acompañamiento.</p><div class="phase-sub"><div class="phase-sub-label">Refactor pedagógico y escalera</div><div class="checks"><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Refactor de Transformación Financiera 2.0</strong> aplicando la Ruta del Estudiante.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Arquitectura de cursos escalera</strong>: básico, intermedio, avanzado y premium.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text">Pliego <strong>MVP de la app de Libertad Financiera</strong> entregado a desarrollador.</div></div></div></div><div class="phase-sub"><div class="phase-sub-label">Artefactos de lanzamiento</div><div class="checks"><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Landing</strong> optimizada para conversión, embudo Hotmart ready.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Diagnóstico</strong> integrado al embudo como herramienta de cualificación.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Membresía cerrada</strong>: cobro recurrente, plazas limitadas, ticket alto.</div></div></div></div><div class="phase-sub"><div class="phase-sub-label">Lanzamiento en Hotmart</div><div class="checks"><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Setup técnico</strong>: cobro recurrente Hotmart, comunidad privada, onboarding.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text">Campaña de lanzamiento con tu base de <strong>LinkedIn, Portafolio, iNNpulsa</strong>.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text">Captura de los <strong>primeros 50 fundadores</strong> pagando membresía recurrente.</div></div></div></div><div class="hito"><div class="hito-label">Hito mes 4, break-even</div><div class="hito-text">Landing, diagnóstico y membresía lanzados en Hotmart, curso refactorizado y 50 fundadores pagando recurrente.</div></div></div></div>
+<div class="tabpanel" id="p5"><div class="phase"><div class="phase-head"><div class="phase-mega">05</div><div><h3 class="phase-name">Pitch, Discurso y SPEAKER</h3><div class="phase-meta"><span class="phase-meta-item">Mes 5</span><span class="phase-meta-item">1 hito</span><span class="phase-meta-item">Voz de David</span></div></div></div><p class="phase-intro">Con el producto vendiéndose, <span class="hi">estandarizamos tu voz</span> y construimos el sistema que multiplica esa voz en todos los canales.</p><div class="phase-sub"><div class="phase-sub-label">Pitch y discurso</div><div class="checks"><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Pitch maestro</strong> en 3 versiones: <strong>30 segundos, 2 minutos, 5 minutos</strong>.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Discurso</strong> con estructura clara para conferencias, entrevistas y videos.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Videos</strong>: formatos definidos con guion repetible.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Transmisión SPEAKER</strong>: formato de captura tipo conferencia reutilizable.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Publicaciones</strong>: línea editorial unificada multicanal.</div></div></div></div><div class="phase-sub"><div class="phase-sub-label">Ejecución, sistema de contenidos</div><div class="checks"><div class="check"><div class="check-mark">✓</div><div class="check-text">Calendario editorial: <strong>LinkedIn, Instagram, YouTube largos, podcast propio</strong>.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text">Pipeline: tú grabas <strong>1 vez por semana</strong>, el equipo genera unas 22 piezas semanales.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text">Incorporación de <strong>Community Manager</strong> y <strong>Editor de video</strong>.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text">Dashboard semanal de alcance y conversiones.</div></div></div></div><div class="hito"><div class="hito-label">Hito mes 5</div><div class="hito-text">Pitch y discurso estandarizados, 60 a 90 piezas mensuales operativo, David visible como SPEAKER.</div></div></div></div>
+<div class="tabpanel" id="p6"><div class="phase"><div class="phase-head"><div class="phase-mega">06</div><div><h3 class="phase-name">Guías Académicas y Estructura</h3><div class="phase-meta"><span class="phase-meta-item">Mes 6</span><span class="phase-meta-item">Cierre</span><span class="phase-meta-item">Institucional</span></div></div></div><p class="phase-intro">Cierre de ciclo. Formalizamos toda la operación académica en <span class="hi">guías profesionales</span>, consolidamos la <span class="hi">estructura institucional</span> y plantamos la primera bandera mediática.</p><div class="phase-sub"><div class="phase-sub-label">Guías académicas</div><div class="checks"><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Perfil del Facilitador</strong>, quién enseña, con qué credenciales, con qué tono.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Perfil del Estudiante</strong>, para quién es cada nivel.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Objetivos</strong> por curso y módulo.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Temario</strong> detallado del programa completo.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Material de aprendizaje</strong>, guías, plantillas, recursos descargables.</div></div></div></div><div class="phase-sub"><div class="phase-sub-label">Estructura institucional</div><div class="checks"><div class="check"><div class="check-mark">✓</div><div class="check-text">Estructura <strong>institucional formal</strong>, qué se llama escuela, programa, membresía.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text">Documentación lista para <strong>escalar</strong>.</div></div></div></div><div class="phase-sub"><div class="phase-sub-label">Autoridad mediática</div><div class="checks"><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Booking de 1 conferencia de 500 personas</strong>.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Sinopsis del libro</strong>, estructura capitular y pitch editorial enviado.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text">Plan de PR: 10 medios objetivo (Portafolio, Semana, El Tiempo, La República, Forbes Colombia).</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Plan de continuidad post seis meses</strong>.</div></div></div></div><div class="hito"><div class="hito-label">Hito mes 6, cierre</div><div class="hito-text">Guías académicas oficiales, estructura institucional, 1 conferencia de 500 personas confirmada, propuesta editorial enviada, plan de continuidad firmado.</div></div></div></div>
+</div></div></section>
+<section><div class="container"><div class="section-head reveal"><div class="section-label">El modelo económico</div><h2 class="section-title">No es un retainer, es una <em>sociedad de dos capas</em>.</h2><p class="section-lead"><strong>Capa 1</strong>: fijo mensual razonable durante los 6 meses. <strong>Capa 2</strong>: coproducción Hotmart <strong>perpetua</strong>.</p></div><div class="econ"><div class="econ-card reveal"><div class="econ-tag">Capa 1, fijo mensual</div><div class="econ-num"><span data-count="9.5">0</span><span class="unit">M COP / mes</span></div><div class="econ-sub">Total 6 meses: <strong>$57M COP</strong>.</div><table class="spec-table"><thead><tr><th>Qué incluye</th><th style="text-align:right">Mensual</th></tr></thead><tbody><tr><td>Estrategia, marca, reputación, plataforma</td><td class="num">$3.8M</td></tr><tr><td>Arquitectura pedagógica y metodología</td><td class="num">$3.8M</td></tr><tr><td>Producción (CM, editor de video, diseño)</td><td class="num">$1.9M</td></tr><tr class="total"><td>Total fijo mensual</td><td class="num">$9.5M</td></tr></tbody></table></div><div class="econ-card alt reveal"><div class="econ-tag">Capa 2, coproducción Hotmart</div><div class="econ-num">50 / 25 / 25</div><div class="econ-sub">Sobre todo producto creado o refactorizado. <strong>Perpetuo</strong>.</div><table class="spec-table"><thead><tr><th>Rol</th><th style="text-align:right">% productos</th></tr></thead><tbody><tr><td>David (rostro, marca, contenido)</td><td class="num">50 %</td></tr><tr><td>Nathalia (arquitectura pedagógica)</td><td class="num">25 %</td></tr><tr><td>Jorge (plataforma, marca, embudo)</td><td class="num">25 %</td></tr></tbody></table><div class="member-note"><strong>Membresía cerrada, trato especial</strong>: David 70 %, Nathalia 15 %, Jorge 15 % durante los primeros 24 meses.</div></div></div><div class="productos-wrap reveal"><div class="productos-head">Productos esperados que entran a coproducción</div><div class="productos"><div class="prod"><div class="prod-tag">Fase 4, refactor</div><div class="prod-name">Transformación Financiera 2.0</div></div><div class="prod"><div class="prod-tag">Fase 4, nuevo</div><div class="prod-name">Curso Intermedio (escalera)</div></div><div class="prod"><div class="prod-tag">Fase 4 / 5, nuevo</div><div class="prod-name">Curso Avanzado o Masterclass</div></div><div class="prod featured"><div class="prod-tag">Motor recurrente</div><div class="prod-name">Membresía Fundadora</div></div><div class="prod"><div class="prod-tag">Fase 5 / 6, autoridad</div><div class="prod-name">Libro digital / ebook</div></div><div class="prod"><div class="prod-tag">Eventual</div><div class="prod-name">Otros derivados</div></div></div></div></div></section>
+<section><div class="container"><div class="section-head reveal"><div class="section-label">Simulador de retorno</div><h2 class="section-title">Mueve los números. <em>Esto es lo que pasaría.</em></h2><p class="section-lead">Ajusta las ventas mensuales esperadas y ve en tiempo real cuánto te queda a ti, cuánto al equipo.</p></div><div class="sim reveal"><div class="sim-head"><div><h3 class="sim-title">¿Cuánto valen los 24 meses, no los 6?</h3><p class="sim-sub">El acompañamiento dura 6 meses. El ecosistema dura años.</p></div><div class="status-pill" style="color:var(--accent-hi);border-color:var(--accent-edge)">Tiempo real</div></div><div class="sim-grid"><div><div class="slider-row"><div class="slider-top"><div class="slider-name">Ventas mensuales totales en Hotmart, desde el mes 6</div><div class="slider-val" id="vSales">$50M</div></div><input type="range" id="rSales" min="10" max="150" value="50" step="5"></div><div class="slider-row"><div class="slider-top"><div class="slider-name">Porcentaje que viene de membresía recurrente</div><div class="slider-val" id="vMem">40 %</div></div><input type="range" id="rMem" min="0" max="100" value="40" step="5"></div><div class="slider-row"><div class="slider-top"><div class="slider-name">Horizonte post acompañamiento, en meses</div><div class="slider-val" id="vHoriz">18 meses</div></div><input type="range" id="rHoriz" min="6" max="36" value="18" step="3"></div><div class="sim-note"><strong>Importante</strong>: esto cubre solo ingresos Hotmart coproducidos. <span class="em">Conferencias, libro físico, app, 1:1 y asesorías corporativas</span> quedan 100 % para David.</div></div><div class="sim-out"><div class="sim-out-h">Reparto mensual en estado estable</div><div class="sim-row"><div class="sim-who">David Aponte</div><div class="sim-amt" id="rDavid">$0M</div></div><div class="sim-row"><div class="sim-who">Nathalia</div><div class="sim-amt" id="rNat">$0M</div></div><div class="sim-row"><div class="sim-who">Jorge</div><div class="sim-amt" id="rJor">$0M</div></div><div class="sim-out-h" style="margin-top:1.5rem">Acumulado en el horizonte</div><div class="sim-row hi"><div class="sim-who">Para David acumulado</div><div class="sim-amt" id="aDavid">$0M</div></div><div class="sim-row"><div class="sim-who">Para Nathalia acumulado</div><div class="sim-amt" id="aNat">$0M</div></div><div class="sim-row"><div class="sim-who">Para Jorge acumulado</div><div class="sim-amt" id="aJor">$0M</div></div><div class="sim-row" style="margin-top:1rem;border-top:1px solid var(--border-soft);padding-top:14px"><div class="sim-who" style="font-family:var(--font-mono);font-size:var(--tx-micro);letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-faint)">Inversión fija pagada</div><div class="sim-amt" style="color:var(--ink-faint);font-size:var(--tx-sm)">$57M COP</div></div><div class="sim-row roi"><div class="sim-who">ROI David</div><div class="sim-amt" id="roi">0x</div></div></div></div></div></div></section>
+<section><div class="container"><div class="section-head reveal"><div class="section-label">Blindaje de ambos lados</div><h2 class="section-title">Las cláusulas que <em>protegen a todos</em>.</h2><p class="section-lead">Esto no es un contrato a ciegas. Son los compromisos cruzados que blindan tanto tu inversión como nuestro trabajo.</p></div><div class="clausulas"><div class="clausula reveal"><div class="clausula-head"><span class="clausula-tag">Te protege a ti</span></div><div class="clausula-list"><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Hitos verificables cada fase</strong>. Si no cumplimos, el mes siguiente va sin cargo hasta corregir.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Reporte mensual</strong> y sesión semanal de 60 minutos.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Toda la IP queda a tu nombre</strong>.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Coproducción contractual</strong>, registrada en cuenta de codistribución Hotmart.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Cláusula de salida</strong> si 2 fases consecutivas no se cumplen.</div></div></div></div><div class="clausula reveal"><div class="clausula-head"><span class="clausula-tag">Nos protege a nosotros</span></div><div class="clausula-list"><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Compromiso 6 meses</strong> con pago mensual asegurado mientras cumplamos hitos.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Exclusividad durante 6 meses</strong>, no contratas otra agencia que duplique funciones.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Coproducción perpetua</strong> sobre los productos creados o refactorizados.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Disponibilidad mínima</strong>: sesión semanal, materiales, grabaciones programadas.</div></div><div class="check"><div class="check-mark">✓</div><div class="check-text"><strong>Confidencialidad mutua</strong> sobre números, métricas y desarrollos.</div></div></div></div></div></div></section>
+<section id="cta"><div class="container"><div class="cta-final reveal"><div class="cta-eyebrow">¿Y ahora?</div><h2 class="cta-h">Esto no termina en una firma. Empieza en una <em>conversación</em>.</h2><p class="cta-p">Si esta propuesta tiene sentido para ti, agendemos una sesión de 60 minutos para resolver dudas, ajustar lo que haya que ajustar y arrancar el lunes siguiente.</p><a href="mailto:jorgehugoperez@iconeialabs.com?subject=Agendar%20sesi%C3%B3n%20de%20decisi%C3%B3n" class="btn btn-primary" style="padding:16px 28px;font-size:var(--tx-body)">Agendar sesión de decisión <span class="btn-arrow">→</span></a><div class="cta-validity">Esta propuesta es válida por <strong>15 días</strong> desde su entrega</div></div></div></section>
+<footer><div class="container"><strong>Nathalia &amp; Jorge</strong>, acompañamiento estratégico para David Alexander Aponte Becerra<br>Propuesta generada a partir del diagnóstico del 22 de mayo de 2026, confidencial</div></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+const prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.documentElement.classList.add('js-on');
+if(window.VANTA&&!prefersReduced){VANTA.NET({el:"#hero-vanta",mouseControls:true,touchControls:true,gyroControls:false,minHeight:200,minWidth:200,scale:1,scaleMobile:1,color:0x4da8ff,backgroundColor:0x0a1430,points:11,maxDistance:22,spacing:17,showDots:true})}
+if(window.VanillaTilt&&!prefersReduced){VanillaTilt.init(document.querySelector("#memoCard"),{max:6,speed:600,glare:true,"max-glare":0.12,perspective:1400,easing:"cubic-bezier(.16,1,.3,1)"})}
+if(window.gsap&&window.ScrollTrigger){
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.utils.toArray('.reveal').forEach(el=>{ScrollTrigger.create({trigger:el,start:'top 88%',once:true,onEnter:()=>el.classList.add('in')})});
+  if(!prefersReduced){
+    gsap.utils.toArray('[data-count]').forEach(el=>{
+      const end=parseFloat(el.dataset.count);const isFloat=end%1!==0;const obj={val:0};
+      ScrollTrigger.create({trigger:el,start:'top 85%',once:true,onEnter:()=>{gsap.to(obj,{val:end,duration:1.6,ease:'expo.out',onUpdate:()=>{el.textContent=isFloat?obj.val.toFixed(1):Math.floor(obj.val)}})}});
+    });
+    gsap.utils.toArray('.arch-bar-fill').forEach(el=>{
+      const target=parseFloat(el.dataset.fill);
+      ScrollTrigger.create({trigger:el,start:'top 88%',once:true,onEnter:()=>{gsap.to(el,{width:target+'%',duration:1.4,ease:'expo.out'})}});
+    });
+    const tlProgress=document.getElementById('tlProgress');
+    if(tlProgress){gsap.to(tlProgress,{width:'86%',ease:'none',scrollTrigger:{trigger:'.timeline-wrap',start:'top 80%',end:'bottom 50%',scrub:1}})}
+    function staggerChecks(panel){const checks=panel.querySelectorAll('.check');gsap.from(checks,{y:14,opacity:0,duration:0.5,stagger:0.04,ease:'expo.out',clearProps:'all'})}
+    gsap.from('.hero-title',{y:24,opacity:0,duration:1,delay:0.1,ease:'expo.out'});
+    gsap.from('.hero-sub',{y:18,opacity:0,duration:0.9,delay:0.25,ease:'expo.out'});
+    gsap.from('.hero-ctas',{y:14,opacity:0,duration:0.8,delay:0.4,ease:'expo.out'});
+    gsap.from('.memo',{y:30,opacity:0,duration:1.2,delay:0.3,ease:'expo.out'});
+    window.__staggerChecks=staggerChecks;
+  }
+}
+const tabs=document.querySelectorAll('.tab');const panels=document.querySelectorAll('.tabpanel');
+function activateTab(t){tabs.forEach(x=>x.classList.toggle('is-active',x.dataset.target===t));panels.forEach(p=>{const a=p.id===t;p.classList.toggle('is-active',a);if(a&&window.__staggerChecks){requestAnimationFrame(()=>window.__staggerChecks(p))}})}
+tabs.forEach(t=>t.addEventListener('click',()=>activateTab(t.dataset.target)));
+document.querySelectorAll('.tnode[data-target]').forEach(n=>{const t=n.dataset.target;if(!t)return;n.addEventListener('click',()=>{activateTab(t);const p=document.querySelector('.phase-section');if(p)p.scrollIntoView({behavior:prefersReduced?'auto':'smooth',block:'start'})})});
+const rSales=document.getElementById('rSales');const rMem=document.getElementById('rMem');const rHoriz=document.getElementById('rHoriz');
+const fmt=n=>'$'+n.toFixed(1).replace(/\.0$/,'')+'M';
+function calcSim(){const s=parseInt(rSales.value);const m=parseInt(rMem.value)/100;const h=parseInt(rHoriz.value);const ms=s*m;const ps=s*(1-m);const dM=ms*0.70+ps*0.50;const nM=ms*0.15+ps*0.25;const jM=ms*0.15+ps*0.25;const dA=dM*h;const nA=nM*h;const jA=jM*h;const r=dA/57;document.getElementById('vSales').textContent=fmt(s);document.getElementById('vMem').textContent=(m*100).toFixed(0)+' %';document.getElementById('vHoriz').textContent=h+' meses';document.getElementById('rDavid').textContent=fmt(dM);document.getElementById('rNat').textContent=fmt(nM);document.getElementById('rJor').textContent=fmt(jM);document.getElementById('aDavid').textContent=fmt(dA);document.getElementById('aNat').textContent=fmt(nA);document.getElementById('aJor').textContent=fmt(jA);document.getElementById('roi').textContent=r.toFixed(1)+'x'}
+[rSales,rMem,rHoriz].forEach(e=>e.addEventListener('input',calcSim));calcSim();
+</script>
+</body>
+</html>
